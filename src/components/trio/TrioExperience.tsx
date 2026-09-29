@@ -183,6 +183,18 @@ function TrailerModal({ open, onClose }: { open: boolean; onClose: () => void })
     window.addEventListener("keydown", fn);
     return () => window.removeEventListener("keydown", fn);
   }, [onClose]);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -428,9 +440,6 @@ export function TrioExperience() {
   const heroOpacity = useTransform(scrollY, [0, 800], [1, 0]);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setIntro(false);
-  }, []);
-  useEffect(() => {
     if (!once.current && !intro) {
       once.current = true;
       sessionStorage.setItem("trio-intro-seen", "1");
@@ -600,6 +609,7 @@ export function TrioExperience() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
+            className="mb-24 md:mb-32 lg:mb-40"
           >
             <SectionLabel>{c.characters.label}</SectionLabel>
             <h2 className="display-heading">{c.characters.heading}</h2>
@@ -689,9 +699,53 @@ export function TrioExperience() {
           </div>
           <ol className="production-timeline">
             {c.behind.stages.map((stage, i) => (
-              <li key={stage}>
-                <span>0{i + 1}</span>
-                <strong>{stage}</strong>
+              <li key={stage.name}>
+                <div className="pr-8 flex flex-col h-full justify-between pb-4">
+                  <div>
+                    <span className="text-primary text-xs tracking-[0.25em] block mb-2 font-mono">
+                      0{i + 1} // FILE.SYS
+                    </span>
+                    <strong className="block text-4xl sm:text-[2.5rem] font-display font-bold uppercase tracking-wide mb-6 text-white">
+                      {stage.name}
+                    </strong>
+                  </div>
+
+                  <div className="mt-8">
+                    <div className="flex justify-between items-end mb-3">
+                      <span className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
+                        {stage.completion === 100 ? "VERIFIED" : "CALCULATING"}
+                      </span>
+                      <span className="font-display text-5xl leading-none font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+                        {stage.completion}
+                        <span className="text-primary text-2xl ml-1">%</span>
+                      </span>
+                    </div>
+
+                    <div className="h-6 w-full bg-background/80 border border-white/10 rounded-sm relative p-[2px] overflow-hidden shadow-[inset_0_2px_15px_rgba(0,0,0,0.9)] backdrop-blur-md">
+                      <div className="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,transparent_0%,transparent_calc(100%-1px),#fff_calc(100%-1px))] bg-[length:6px_100%]" />
+
+                      <motion.div
+                        className="h-full relative rounded-[1px]"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${stage.completion}%` }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 1.8,
+                          delay: i * 0.2 + 0.2,
+                          ease: [0.16, 1, 0.3, 1] as any,
+                        }}
+                        style={{
+                          boxShadow: "0 0 25px var(--primary)",
+                          background:
+                            "linear-gradient(90deg, var(--primary) 0%, oklch(0.65 0.22 27) 100%)",
+                        }}
+                      >
+                        <div className="absolute top-0 right-0 w-1.5 h-full bg-white opacity-90 shadow-[0_0_10px_white]" />
+                        <div className="absolute inset-x-0 top-0 h-[1px] bg-white/40" />
+                      </motion.div>
+                    </div>
+                  </div>
+                </div>
               </li>
             ))}
           </ol>
@@ -715,8 +769,6 @@ export function TrioExperience() {
             ))}
           </div>
         </motion.section>
-
-        <FundingSection />
 
         <motion.section
           initial="hidden"
@@ -767,6 +819,8 @@ export function TrioExperience() {
             </div>
           </div>
         </motion.section>
+
+        <FundingSection />
 
         <motion.section
           initial="hidden"

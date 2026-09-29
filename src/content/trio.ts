@@ -30,15 +30,15 @@ export const trioContent = {
     inspiration: "Inspired by Daniel 3 × Revelation 13",
     releaseStatus: "COMING SOON",
     releaseDate: "",
-    teaserUrl: "https://www.youtube.com/embed/oQ8fd7MQh9I?autoplay=1&rel=0",
+    teaserUrl: "https://www.youtube.com/embed/UMXzCSEDjmw?autoplay=1&rel=0",
     copyright: "TRIO © 2026 Bible Way Galaxy",
   },
   navigation: [
     { label: "STORY", href: "#story" },
     { label: "WORLD", href: "#world" },
     { label: "THE THREE", href: "#the-three" },
-    { label: "FUNDING & CONTRIBUTION", href: "#funding" },
     { label: "VISION", href: "#vision" },
+    { label: "FUNDING & CONTRIBUTION", href: "#funding" },
     { label: "WATCH", href: "#watch" },
   ],
   ctas: { watch: "WATCH THE TEASER", explore: "EXPLORE TRIO" },
@@ -122,7 +122,12 @@ export const trioContent = {
     label: "04 / BEHIND TRIO",
     heading: "FROM SCRIPT\nTO SCREEN.",
     copy: "TRIO is an independently produced film shaped through faith, collaboration and ambitious filmmaking.",
-    stages: ["CONCEPT", "PRODUCTION", "VFX", "FINAL FILM"],
+    stages: [
+      { name: "CONCEPT", completion: 100 },
+      { name: "PRODUCTION", completion: 100 },
+      { name: "VFX", completion: 2 },
+      { name: "FINAL FILM", completion: 70 },
+    ],
     images: Array.from({ length: 7 }, (_, index) =>
       placeholder(
         `PRODUCTION FRAME 0${index + 1}`,
@@ -134,8 +139,8 @@ export const trioContent = {
     label: "05 / THE VISION",
     heading: "REDEFINING\nCHRISTIAN CINEMA.",
     copy: [
-      "TRIO represents a pursuit of uncompromising faith-driven storytelling presented with cinematic ambition and technical excellence.",
-      "The goal is not simply to create Christian content. The goal is to tell powerful stories of faith with the cinematic craft they deserve.",
+      "TRIO would not have been possible without the incredible people who believed in this vision and chose to stand with us. More than funding a film, you believed in our mission to tell stories rooted in Scripture and use cinema for the glory of God. Every contribution, big or small, helped bring this story from an idea to reality. From the entire TRIO team, thank you for trusting us and being part of this journey.",
+      "Glory to God, because He lives!",
     ],
   },
   creators: {

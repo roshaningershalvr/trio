@@ -1,0 +1,94 @@
+
+> build
+> vite build
+
+[33mThe plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the [1mresolve.tsconfigPaths[22m option. You can remove the plugin and set [1mresolve.tsconfigPaths: true[22m in your Vite config instead.[39m
+[36mvite v8.1.5 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 2883 modules transformed.
+rendering chunks...
+computing gzip size...
+.output/public/assets/styles-CgX5jRjp.css  115.73 kB │ gzip:  20.77 kB
+.output/public/assets/index-2Mtl50pE.js    378.19 kB │ gzip: 118.04 kB
+.output/public/assets/routes-BZZE2p-I.js   639.17 kB │ gzip: 179.35 kB
+
+[32m✓ built in 4.36s[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[36mvite v8.1.5 [32mbuilding ssr environment for production...[36m[39m
+[2Ktransforming...✓ 71 modules transformed.
+rendering chunks...
+computing gzip size...
+node_modules/.nitro/vite/services/ssr/assets/styles-CgX5jRjp.css                     115.73 kB │ gzip: 20.77 kB
+node_modules/.nitro/vite/services/ssr/assets/empty-plugin-adapters-D9UWiqvJ.js         0.22 kB │ gzip:  0.16 kB
+node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-DDMKtjLE.js    0.53 kB │ gzip:  0.31 kB
+node_modules/.nitro/vite/services/ssr/assets/start-RKGGYzjZ.js                         1.57 kB │ gzip:  0.71 kB
+node_modules/.nitro/vite/services/ssr/assets/createCsrfMiddleware-B2To0gPJ.js          3.19 kB │ gzip:  1.01 kB
+node_modules/.nitro/vite/services/ssr/index.js                                         4.61 kB │ gzip:  1.92 kB
+node_modules/.nitro/vite/services/ssr/assets/router-BiRvw6RJ.js                        6.99 kB │ gzip:  2.39 kB
+node_modules/.nitro/vite/services/ssr/assets/server-CTROlsKK.js                       56.40 kB │ gzip: 14.53 kB
+node_modules/.nitro/vite/services/ssr/assets/routes-Ckb-J4mJ.js                       76.89 kB │ gzip: 17.40 kB
+
+[32m✓ built in 1.21s[39m
+
+[90m[[90mnitro[90m][39m [35m◐[39m Building [[35mNitro[39m] [2m(preset: [36mcloudflare-module[39m, compatibility: [36m2026-09-29[39m)[22m
+[90m[[90mnitro[90m][39m [32m✔[39m Generated public [36m.output/public[39m
+[36mvite v8.1.5 [32mbuilding nitro environment for production...[36m[39m
+
+[43m[30m WARN [39m[49m [36minlineDynamicImports[39m option is ignored because the [36mcodeSplitting[39m option is specified.
+
+[2Ktransforming...✓ 2925 modules transformed.
+rendering chunks...
+computing gzip size...
+.output/server/_ssr/empty-plugin-adapters-D9UWiqvJ.mjs         0.23 kB │ gzip:   0.16 kB
+.output/server/_tanstack-start-manifest_v-DDMKtjLE.mjs         0.58 kB │ gzip:   0.34 kB
+.output/server/_chunks/ssr-renderer.mjs                        0.60 kB │ gzip:   0.36 kB
+.output/server/_libs/hookable.mjs                              1.17 kB │ gzip:   0.52 kB
+.output/server/_ssr/start-RKGGYzjZ.mjs                         1.53 kB │ gzip:   0.70 kB
+.output/server/_runtime.mjs                                    1.61 kB │ gzip:   0.74 kB
+.output/server/_libs/react-is.mjs                              1.67 kB │ gzip:   0.65 kB
+.output/server/_libs/prop-types.mjs                            2.27 kB │ gzip:   0.84 kB
+.output/server/_libs/react+tanstack__react-query.mjs           2.88 kB │ gzip:   1.20 kB
+.output/server/_ssr/createCsrfMiddleware-B2To0gPJ.mjs          3.11 kB │ gzip:   1.01 kB
+.output/server/_libs/class-variance-authority+clsx.mjs         3.17 kB │ gzip:   1.24 kB
+.output/server/_libs/d3-path.mjs                               3.25 kB │ gzip:   1.16 kB
+.output/server/_ssr/ssr.mjs                                    4.55 kB │ gzip:   1.92 kB
+.output/server/_libs/d3-interpolate.mjs                        5.02 kB │ gzip:   1.61 kB
+.output/server/_libs/radix-ui__react-slot.mjs                  5.61 kB │ gzip:   1.73 kB
+.output/server/_libs/lucide-react.mjs                          6.43 kB │ gzip:   1.59 kB
+.output/server/_ssr/router-BiRvw6RJ.mjs                        7.66 kB │ gzip:   2.50 kB
+.output/server/_libs/d3-array.mjs                              8.05 kB │ gzip:   2.25 kB
+.output/server/_libs/eventemitter3.mjs                         8.31 kB │ gzip:   2.05 kB
+.output/server/_libs/h3-v2+rou3+srvx.mjs                       9.87 kB │ gzip:   3.06 kB
+.output/server/_libs/d3-color.mjs                             10.38 kB │ gzip:   3.57 kB
+.output/server/_libs/d3-format.mjs                            10.56 kB │ gzip:   3.02 kB
+.output/server/index.mjs                                      11.14 kB │ gzip:   3.60 kB
+.output/server/_libs/tanstack__history.mjs                    12.09 kB │ gzip:   3.48 kB
+.output/server/_libs/fast-equals.mjs                          15.98 kB │ gzip:   4.14 kB
+.output/server/_libs/h3+rou3+srvx.mjs                         17.32 kB │ gzip:   4.99 kB
+.output/server/_libs/@radix-ui/react-compose-refs+[...].mjs   17.67 kB │ gzip:   4.84 kB
+.output/server/_libs/decimal.js-light.mjs                     23.31 kB │ gzip:   6.89 kB
+.output/server/_libs/d3-shape.mjs                             24.56 kB │ gzip:   5.02 kB
+.output/server/_libs/react-smooth.mjs                         37.83 kB │ gzip:   8.15 kB
+.output/server/_ssr/server-CTROlsKK.mjs                       54.83 kB │ gzip:  14.41 kB
+.output/server/_libs/d3-scale+[...].mjs                       58.22 kB │ gzip:  12.11 kB
+.output/server/_ssr/routes-Ckb-J4mJ.mjs                       86.34 kB │ gzip:  17.64 kB
+.output/server/_libs/tanstack__query-core.mjs                 86.50 kB │ gzip:  20.50 kB
+.output/server/_libs/tailwind-merge.mjs                       88.92 kB │ gzip:  15.71 kB
+.output/server/_libs/@tanstack/router-core+[...].mjs         125.35 kB │ gzip:  26.53 kB
+.output/server/_libs/lodash.mjs                              164.05 kB │ gzip:  29.72 kB
+.output/server/_libs/framer-motion+[...].mjs                 440.96 kB │ gzip: 116.44 kB
+.output/server/_libs/recharts+[...].mjs                      569.99 kB │ gzip: 105.62 kB
+.output/server/_libs/@tanstack/react-router+[...].mjs        681.95 kB │ gzip: 143.16 kB
+
+[32m✓ built in 3.43s[39m
+[90m[[90mnitro[90m][39m [36mℹ[39m Using auto generated worker name: [36mroshaningershalvr-trio[39m
+[36mℹ[39m Generated [36m.output/server/wrangler.json[39m
+[36mℹ[39m Generated [36m.wrangler/deploy/config.json[39m
+[36mℹ[39m Generated [36m.output/public/_headers[39m
+[36mℹ[39m Generated [36m.output/nitro.json[39m
+
+[90m[[90mnitro[90m][39m [32m✔[39m You can preview this build using [36mnpx vite preview[39m
+[90m[[90mnitro[90m][39m [32m✔[39m You can deploy this build using [36mnpx nitro deploy --prebuilt[39m

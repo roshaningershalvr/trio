@@ -1,0 +1,41 @@
+
+> lint
+> eslint .
+
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\Funding\FundingSection.tsx
+  88:95  error  Insert `⏎·········`  prettier/prettier
+  91:99  error  Insert `⏎·········`  prettier/prettier
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\trio\TrioExperience.tsx
+  442:1  error  Delete `⏎`  prettier/prettier
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\ui\badge.tsx
+  32:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\ui\button.tsx
+  58:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\ui\form.tsx
+  163:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\ui\navigation-menu.tsx
+  111:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\ui\sidebar.tsx
+  743:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\TRIO_web_page\trio-thechristianfilm\src\components\ui\toggle.tsx
+  42:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\TRIO_web_page\trio-thechristianfilm\src\lib\funding-data.ts
+  36:4  error  Replace `·date:·"Wednesday,·June·3,·2026",·category:·"MCIL",·amount:·1400,·notes:·"Miscellaneous·of·Day·2"` with `⏎····date:·"Wednesday,·June·3,·2026",⏎····category:·"MCIL",⏎····amount:·1400,⏎····notes:·"Miscellaneous·of·Day·2",⏎·`                                            prettier/prettier
+  49:1  error  Delete `··`                                                                                                                                                                                                                                                                        prettier/prettier
+  51:4  error  Replace `·date:·"Tuesday,·September·1,·2026",·category:·"Higgsfield",·amount:·5900,·notes:·"VFX·AI·models"` with `⏎····date:·"Tuesday,·September·1,·2026",⏎····category:·"Higgsfield",⏎····amount:·5900,⏎····notes:·"VFX·AI·models",⏎·`                                            prettier/prettier
+  52:4  error  Replace `·date:·"Tuesday,·September·1,·2026",·category:·"ElevenLabs",·amount:·968,·notes:·"Generative·AI·models·&·Voice·studio"` with `⏎····date:·"Tuesday,·September·1,·2026",⏎····category:·"ElevenLabs",⏎····amount:·968,⏎····notes:·"Generative·AI·models·&·Voice·studio",⏎·`  prettier/prettier
+  53:4  error  Replace `·date:·"Tuesday,·September·1,·2026",·category:·"Envanto·tools",·amount:·499,·notes:·"Media·assets"` with `⏎····date:·"Tuesday,·September·1,·2026",⏎····category:·"Envanto·tools",⏎····amount:·499,⏎····notes:·"Media·assets",⏎·`                                          prettier/prettier
+  54:4  error  Replace `·date:·"Tuesday,·September·1,·2026",·category:·"Sonic·atlas",·amount:·500,·notes:·"Music·production·tools"·}` with `⏎····date:·"Tuesday,·September·1,·2026",⏎····category:·"Sonic·atlas",⏎····amount:·500,⏎····notes:·"Music·production·tools",⏎··},`                     prettier/prettier
+
+✖ 15 problems (9 errors, 6 warnings)
+  9 errors and 0 warnings potentially fixable with the `--fix` option.
+

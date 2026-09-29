@@ -1181,6 +1181,7 @@ footer nav {
   place-items: center;
   padding: 4vw;
   background: oklch(0.04 0 0 / 0.97);
+  overflow-y: auto;
 }
 .modal-backdrop iframe {
   width: min(90vw, 80rem);
@@ -1563,17 +1564,5 @@ footer nav {
     width: 100%;
     margin: 1rem 0 0;
     flex-wrap: wrap;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }

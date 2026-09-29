@@ -33,12 +33,14 @@ function AnimatedCounter({ value, prefix = "" }: { value: number; prefix?: strin
 
 export function FundingKPIs({
   totalFunding,
-  totalSpent,
+  productionCost,
+  postProductionCost,
   remainingBalance,
   accountsClosed,
 }: {
   totalFunding: number;
-  totalSpent: number;
+  productionCost: number;
+  postProductionCost: number;
   remainingBalance: number;
   accountsClosed: string;
 }) {
@@ -46,11 +48,12 @@ export function FundingKPIs({
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
         {[
-          { label: "TOTAL FUNDING", value: totalFunding, color: "text-blue-400" },
-          { label: "TOTAL SPENT", value: totalSpent, color: "text-red-400" },
-          { label: "REMAINING BALANCE", value: remainingBalance, color: "text-green-400" },
+          { label: "TOTAL CONTRIBUTION", value: totalFunding, color: "text-blue-400" },
+          { label: "PRODUCTION", value: productionCost, color: "text-red-400" },
+          { label: "POST PRODUCTION", value: postProductionCost, color: "text-purple-400" },
+          { label: "REMAINING", value: remainingBalance, color: "text-green-400" },
         ].map((kpi, i) => (
           <motion.div
             key={kpi.label}
@@ -89,8 +92,10 @@ export function FundingKPIs({
         transition={{ delay: 0.6 }}
         className="flex flex-col items-center gap-1 text-xs text-muted-foreground/70 tracking-widest text-center mt-6"
       >
-        <p>“Figures shown are based on the TRIO production budget and recorded accounts.”</p>
-        <p>Accounts Closed: {accountsClosed}</p>
+        <p>
+          “Figures shown are based on the TRIO production budget recorded & managed by Bible Way
+          Galaxy”
+        </p>
       </motion.div>
     </div>
   );

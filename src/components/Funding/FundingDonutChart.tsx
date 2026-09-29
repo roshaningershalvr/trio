@@ -31,9 +31,15 @@ export function FundingDonutChart() {
 
   return (
     <div className="w-full glass-soft p-8 rounded-xl border border-primary/10">
-      <h3 className="text-xl md:text-2xl font-display tracking-widest text-center mb-8 uppercase text-primary/90">
-        Where Did The Funding Come From?
-      </h3>
+      <div className="text-center mb-10 max-w-2xl mx-auto">
+        <h3 className="text-xl md:text-2xl font-display tracking-widest mb-4 uppercase text-primary/90">
+          Where Did The Funding Come From?
+        </h3>
+        <p className="text-sm md:text-base text-muted-foreground/90 leading-relaxed tracking-wide">
+          This journey was made possible through the generous support of individuals who believed in
+          our vision and trusted us to bring it to life for the glory of God.
+        </p>
+      </div>
 
       <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
         <div className="w-full md:w-[400px] h-[400px] relative">
@@ -78,7 +84,7 @@ export function FundingDonutChart() {
 
         <div className="flex flex-col gap-4 max-w-sm w-full">
           <h4 className="text-sm tracking-[0.2em] text-muted-foreground border-b border-primary/20 pb-2 mb-2">
-            CONTRIBUTOR LEGEND
+            OUR CONTRIBUTORS
           </h4>
           <div className="max-h-[300px] overflow-y-auto pr-4 space-y-3 custom-scrollbar">
             {specifiedContributions.map((entry, index) => (

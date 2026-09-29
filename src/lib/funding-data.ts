@@ -1,29 +1,32 @@
 export const OVERVIEW_METRICS = {
   totalFunding: 36200,
-  totalSpent: 24400,
-  remainingBalance: 10801,
+  totalSpent: 32267,
+  productionCost: 24400,
+  postProductionCost: 7867,
+  remainingBalance: 3933,
   accountsClosed: "6th August 2026",
 };
 
 export const CONTRIBUTORS = [
   { name: "Dr. Samuel Meshak", amount: 10000 },
-  { name: "Vasanth", amount: 6000 },
-  { name: "Sneha Benjamin", amount: 5000 },
-  { name: "Moses", amount: 5000 },
-  { name: "Jeshurun", amount: 3200 },
-  { name: "Shalom", amount: 2000 },
-  { name: "Meshak", amount: 1000 },
-  { name: "Solomon", amount: 1000 },
-  { name: "Amali", amount: 1000 },
-  { name: "Jenny", amount: 1000 },
-  { name: "John Paul", amount: 1000 },
-  { name: "Jemimah", amount: null }, // Amount not specified
+  { name: "Mr. Vasanth", amount: 6000 },
+  { name: "Mrs. Sneha & Mr. Benjamin", amount: 5000 },
+  { name: "Mr. Moses", amount: 5000 },
+  { name: "Ms. Jemimah", amount: 2000 },
+  { name: "Mr. Shalom", amount: 2000 },
+  { name: "Ms. Metilda", amount: 1200 },
+  { name: "Mr. Meshak", amount: 1000 },
+  { name: "Mr. Solomon", amount: 1000 },
+  { name: "Ms. Amali", amount: 1000 },
+  { name: "Ms. Jenny", amount: 1000 },
+  { name: "Mr. John Paul", amount: 1000 },
 ];
 
 export const TRANSACTIONS = [
+  // PRODUCTION
   { date: "Wednesday, May 20, 2026", category: "Advance - Rent", amount: 500, notes: "Day 1" },
   { date: "Friday, May 22, 2026", category: "Advance - Rent", amount: 500, notes: "Day 2 & 3" },
-  { date: "Not Specified", category: "MICL", amount: 1150, notes: "" },
+  { date: "", category: "MICL", amount: 1150, notes: "" },
   { date: "Wednesday, May 27, 2026", category: "Make up", amount: 870, notes: "Foundation" },
   { date: "Wednesday, May 27, 2026", category: "Petrol", amount: 105, notes: "To Arupadai veedu" },
   { date: "Friday, May 29, 2026", category: "Prop - Office", amount: 500, notes: "Printouts" },
@@ -48,6 +51,32 @@ export const TRANSACTIONS = [
   { date: "Friday, July 31, 2026", category: "RENT", amount: 2100, notes: "Day 7 - July 31" },
   { date: "Friday, July 31, 2026", category: "Food", amount: 360, notes: "Final lunch" },
   { date: "Friday, July 31, 2026", category: "Petrol", amount: 215, notes: "To Maduravayol" },
+
+  // POST PRODUCTION
+  {
+    date: "Tuesday, September 1, 2026",
+    category: "Higgsfield",
+    amount: 5900,
+    notes: "VFX AI models",
+  },
+  {
+    date: "Tuesday, September 1, 2026",
+    category: "ElevenLabs",
+    amount: 968,
+    notes: "Generative AI models & Voice studio",
+  },
+  {
+    date: "Tuesday, September 1, 2026",
+    category: "Envanto tools",
+    amount: 499,
+    notes: "Media assets",
+  },
+  {
+    date: "Tuesday, September 1, 2026",
+    category: "Sonic atlas",
+    amount: 500,
+    notes: "Music production tools",
+  },
 ];
 
 export const CATEGORIES = Array.from(new Set(TRANSACTIONS.map((t) => t.category)));

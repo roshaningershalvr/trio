@@ -37,7 +37,7 @@ export function ContributorBarChart() {
               key={contributor.name}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.05, ease: "easeOut" }}
               className="flex flex-col gap-2 w-full"
             >
@@ -63,7 +63,7 @@ export function ContributorBarChart() {
                   }}
                   initial={{ width: 0 }}
                   whileInView={{ width: barWidth }}
-                  viewport={{ once: true, margin: "-10%" }}
+                  viewport={{ once: true }}
                   transition={{ duration: 1.2, delay: 0.2 + i * 0.05, ease: "easeOut" }}
                 />
               </div>

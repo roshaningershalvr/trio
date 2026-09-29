@@ -83,13 +83,14 @@ export function FundingSection() {
         </section>
       </div>
 
-      {/* Footer Note */}
-      <div className="mt-16 text-center text-xs tracking-widest text-muted-foreground/50 pt-8 border-t border-white/5 font-mono">
-        <p>TRIO PROCESS METRICS :: FINANCIAL SYS LOG</p>
-        <p>ACCOUNTS CLOSED: {OVERVIEW_METRICS.accountsClosed}</p>
-        <p className="mt-4">
-          ALL FIGURES DISPLAYED ARE BASED ON THE RECORDED TRIO PRODUCTION BUDGET AND TRANSACTION
-          RECORDS.
+      <div className="mt-16 text-center pt-8 border-t border-primary/20">
+        <p className="text-lg md:text-xl font-display text-primary/90 mb-4 max-w-3xl mx-auto leading-relaxed">
+          TRIO represents a pursuit of uncompromising faith-driven storytelling presented with
+          cinematic ambition and technical excellence.
+        </p>
+        <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed tracking-wide">
+          The goal is not simply to create Christian content. The goal is to tell powerful stories
+          of faith with the cinematic craft they deserve.
         </p>
       </div>
     </motion.section>
