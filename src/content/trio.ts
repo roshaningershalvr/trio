@@ -125,7 +125,7 @@ export const trioContent = {
     stages: [
       { name: "CONCEPT", completion: 100 },
       { name: "PRODUCTION", completion: 100 },
-      { name: "VFX", completion: 2 },
+      { name: "POST PRODUCTION", completion: 2 },
       { name: "FINAL FILM", completion: 70 },
     ],
     images: Array.from({ length: 7 }, (_, index) =>
@@ -139,8 +139,8 @@ export const trioContent = {
     label: "05 / THE VISION",
     heading: "REDEFINING\nCHRISTIAN CINEMA.",
     copy: [
-      "TRIO would not have been possible without the incredible people who believed in this vision and chose to stand with us. More than funding a film, you believed in our mission to tell stories rooted in Scripture and use cinema for the glory of God. Every contribution, big or small, helped bring this story from an idea to reality. From the entire TRIO team, thank you for trusting us and being part of this journey.",
-      "Glory to God, because He lives!",
+      "TRIO — Redefining Christian Cinema by J³ Cube",
+      "TRIO is more than a film; it is a bold vision to redefine Christian cinema for a generation that deserves stories as powerful in their storytelling as they are profound in their faith. Crafted by J³ Cube, TRIO brings together cinematic excellence, gripping suspense, thought-provoking world-building, and uncompromising biblical truth to create an experience that transcends conventions and challenges expectations. Rooted in the prophetic imagery of Daniel 3 and Revelation 13, this Christian thriller confronts the cost of conviction in a world that demands conformity, asking a timeless question: When the world chooses to bow, will you stand? With a commitment to innovation, excellence, and Christ-centred storytelling, J³ Cube seeks to push the boundaries of Christian filmmaking—not merely to tell stories about faith, but to bring faith to life through cinema. This is TRIO. This is J³ Cube. And this is Christian cinema reimagined.",
     ],
   },
   creators: {
@@ -178,9 +178,7 @@ export const trioContent = {
   ],
   finalMessage: ["BIBLE WAY GALAXY", "GLORY TO GOD, BECAUSE HE LIVES!"],
   socials: [
-    { label: "Instagram", href: "#" },
-    { label: "YouTube", href: "#" },
-    { label: "Privacy", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Instagram", href: "https://www.instagram.com/trio_thechristianfilm/" },
+    { label: "YouTube", href: "https://www.youtube.com/@BibleWayGalaxy" },
   ],
 } as const;

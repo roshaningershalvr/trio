@@ -30,10 +30,10 @@ export function FundingDonutChart() {
   ];
 
   return (
-    <div className="w-full glass-soft p-8 rounded-xl border border-primary/10">
-      <div className="text-center mb-10 max-w-2xl mx-auto">
+    <div className="w-full glass-soft p-4 md:p-8 rounded-xl border border-primary/10">
+      <div className="text-center mb-8 max-w-2xl mx-auto">
         <h3 className="text-xl md:text-2xl font-display tracking-widest mb-4 uppercase text-primary/90">
-          Where Did The Funding Come From?
+          Our Contributions Received
         </h3>
         <p className="text-sm md:text-base text-muted-foreground/90 leading-relaxed tracking-wide">
           This journey was made possible through the generous support of individuals who believed in
@@ -41,16 +41,17 @@ export function FundingDonutChart() {
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
-        <div className="w-full md:w-[400px] h-[400px] relative">
+      <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-center lg:gap-12">
+        {/* Chart — fixed square, centred on mobile */}
+        <div className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[380px] md:h-[380px] flex-shrink-0 mx-auto lg:mx-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={specifiedContributions}
                 cx="50%"
                 cy="50%"
-                innerRadius={110}
-                outerRadius={160}
+                innerRadius="55%"
+                outerRadius="75%"
                 paddingAngle={2}
                 dataKey="amount"
                 stroke="none"
@@ -75,34 +76,35 @@ export function FundingDonutChart() {
 
           {/* Central Label */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-muted-foreground text-sm tracking-widest mb-1">TOTAL</span>
-            <span className="text-3xl font-display font-bold">
+            <span className="text-muted-foreground text-xs tracking-widest mb-1">TOTAL</span>
+            <span className="text-2xl md:text-3xl font-display font-bold">
               ₹{new Intl.NumberFormat("en-IN").format(total)}
             </span>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 max-w-sm w-full">
+        {/* Legend — full width on mobile, constrained on desktop */}
+        <div className="flex flex-col gap-4 w-full max-w-sm mx-auto lg:mx-0">
           <h4 className="text-sm tracking-[0.2em] text-muted-foreground border-b border-primary/20 pb-2 mb-2">
-            OUR CONTRIBUTORS
+            CONTRIBUTIONS RECEIVED
           </h4>
-          <div className="max-h-[300px] overflow-y-auto pr-4 space-y-3 custom-scrollbar">
+          <div className="max-h-[300px] overflow-y-auto pr-2 space-y-3 custom-scrollbar">
             {specifiedContributions.map((entry, index) => (
               <div key={entry.name} className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-3">
                   <div
-                    className="w-3 h-3 rounded-full shadow-[0_0_8px_rgba(0,0,0,0.5)]"
+                    className="w-3 h-3 rounded-full flex-shrink-0 shadow-[0_0_8px_rgba(0,0,0,0.5)]"
                     style={{ backgroundColor: COLORS[index % COLORS.length] }}
                   />
                   <span
-                    className="text-foreground/90 font-medium truncate w-[140px]"
+                    className="text-foreground/90 font-medium truncate w-[130px]"
                     title={entry.name}
                   >
                     {entry.name}
                   </span>
                 </div>
-                <div className="flex gap-4">
-                  <span className="text-muted-foreground w-12 text-right">
+                <div className="flex gap-3">
+                  <span className="text-muted-foreground w-12 text-right text-xs">
                     {((entry.amount / total) * 100).toFixed(1)}%
                   </span>
                   <span className="font-mono text-primary/80">

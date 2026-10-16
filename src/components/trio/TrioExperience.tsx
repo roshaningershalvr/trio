@@ -575,6 +575,8 @@ export function TrioExperience() {
           </div>
         </motion.section>
 
+        <SystemInterlude />
+
         <motion.section
           initial="hidden"
           whileInView="visible"
@@ -600,8 +602,6 @@ export function TrioExperience() {
             ))}
           </div>
         </motion.section>
-
-        <SystemInterlude />
 
         <section id="the-three" className="characters-section section-wrap">
           <motion.div

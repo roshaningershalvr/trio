@@ -35,25 +35,22 @@ export function FundingKPIs({
   totalFunding,
   productionCost,
   postProductionCost,
-  remainingBalance,
   accountsClosed,
 }: {
   totalFunding: number;
   productionCost: number;
   postProductionCost: number;
-  remainingBalance: number;
   accountsClosed: string;
 }) {
   const formatCurrency = (val: number) => `₹${new Intl.NumberFormat("en-IN").format(val)}`;
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
         {[
           { label: "TOTAL CONTRIBUTION", value: totalFunding, color: "text-blue-400" },
-          { label: "PRODUCTION", value: productionCost, color: "text-red-400" },
-          { label: "POST PRODUCTION", value: postProductionCost, color: "text-purple-400" },
-          { label: "REMAINING", value: remainingBalance, color: "text-green-400" },
+          { label: "PRODUCTION & SET WORKS", value: productionCost, color: "text-red-400" },
+          { label: "POST PRODUCTION & PUBLICITY", value: postProductionCost, color: "text-purple-400" },
         ].map((kpi, i) => (
           <motion.div
             key={kpi.label}

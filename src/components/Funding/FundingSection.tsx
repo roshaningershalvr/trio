@@ -2,11 +2,9 @@
 import { motion } from "framer-motion";
 import { FundingKPIs } from "./FundingKPIs";
 import { FundingDonutChart } from "./FundingDonutChart";
-import { ContributorBarChart } from "./ContributorBarChart";
 import { BudgetUtilizationChart } from "./BudgetUtilizationChart";
 import { ExpenseCategoryCards } from "./ExpenseCategoryCards";
 import { ProductionTimelineChart } from "./ProductionTimelineChart";
-import { TransactionHistoryTable } from "./TransactionHistoryTable";
 import { OVERVIEW_METRICS } from "@/lib/funding-data";
 
 function SectionLabel({ children }: { children: string }) {
@@ -44,8 +42,13 @@ export function FundingSection() {
             Transparent Production Finance Overview
           </p>
           <p className="inline-block text-sm text-foreground/80 leading-relaxed border-l-2 border-primary/40 pl-4 bg-primary/5 p-4 rounded-r-md backdrop-blur-sm max-w-2xl mx-auto text-left">
-            This section presents the actual TRIO production funding and expenditure data. Navigate
-            from high-level summaries down to individual transaction records.
+            TRIO would not have been possible without the incredible people who believed in this
+            vision and chose to stand with us. More than funding a film, you believed in our mission
+            to tell stories rooted in Scripture and use cinema for the glory of God. Every
+            contribution, big or small, helped bring this story from an idea to reality. From the
+            entire TRIO team, thank you for trusting us and being part of this journey.
+            <br /><br />
+            <span className="text-primary font-semibold">Glory to God, because He lives!</span>
           </p>
         </div>
       </div>
@@ -56,10 +59,9 @@ export function FundingSection() {
           <FundingKPIs {...OVERVIEW_METRICS} />
         </section>
 
-        {/* FUNDING SOURCES & CONTRIBUTOR BREAKDOWN */}
+        {/* CONTRIBUTIONS RECEIVED */}
         <section className="space-y-6">
           <FundingDonutChart />
-          <ContributorBarChart />
         </section>
 
         {/* BUDGET UTILIZATION */}
@@ -77,10 +79,6 @@ export function FundingSection() {
           <ProductionTimelineChart />
         </section>
 
-        {/* FULL TRANSACTION HISTORY */}
-        <section>
-          <TransactionHistoryTable />
-        </section>
       </div>
 
       <div className="mt-16 text-center pt-8 border-t border-primary/20">

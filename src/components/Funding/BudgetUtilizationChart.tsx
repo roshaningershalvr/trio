@@ -3,12 +3,11 @@ import { OVERVIEW_METRICS } from "@/lib/funding-data";
 import { AlertCircle } from "lucide-react";
 
 export function BudgetUtilizationChart() {
-  const { totalFunding, productionCost, postProductionCost, remainingBalance } = OVERVIEW_METRICS;
+  const { totalFunding, productionCost, postProductionCost } = OVERVIEW_METRICS;
 
   const data = [
     { name: "Production", value: productionCost, color: "#ef4444" },
-    { name: "Post Production", value: postProductionCost, color: "#a855f7" },
-    { name: "Remaining", value: remainingBalance, color: "#10b981" },
+    { name: "Post Production & Publicity", value: postProductionCost, color: "#a855f7" },
   ];
 
   return (
@@ -65,15 +64,9 @@ export function BudgetUtilizationChart() {
             </p>
           </div>
           <div className="border-l-2 border-purple-500 pl-4">
-            <p className="text-xs tracking-[0.2em] text-muted-foreground">POST PRODUCTION</p>
+            <p className="text-xs tracking-[0.2em] text-muted-foreground">POST PRODUCTION & PUBLICITY</p>
             <p className="text-2xl font-display text-purple-500">
               ₹{new Intl.NumberFormat("en-IN").format(postProductionCost)}
-            </p>
-          </div>
-          <div className="border-l-2 border-emerald-500 pl-4">
-            <p className="text-xs tracking-[0.2em] text-muted-foreground">REMAINING</p>
-            <p className="text-2xl font-display text-emerald-500">
-              ₹{new Intl.NumberFormat("en-IN").format(remainingBalance)}
             </p>
           </div>
         </div>
