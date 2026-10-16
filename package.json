@@ -16,6 +16,11 @@
     "@tanstack/start-server-core": "1.169.43",
     "@tanstack/router-core": "1.171.37"
   },
+  "resolutions": {
+    "rolldown": "1.2.1",
+    "@tanstack/start-server-core": "1.169.43",
+    "@tanstack/router-core": "1.171.37"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
@@ -48,7 +53,9 @@
     "@tanstack/react-query": "^5.101.1",
     "@tanstack/react-router": "1.170.44",
     "@tanstack/react-start": "1.169.2",
+    "@tanstack/router-core": "1.171.37",
     "@tanstack/router-plugin": "1.168.46",
+    "@tanstack/start-server-core": "1.169.43",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
