@@ -47,7 +47,8 @@ export function FundingSection() {
             to tell stories rooted in Scripture and use cinema for the glory of God. Every
             contribution, big or small, helped bring this story from an idea to reality. From the
             entire TRIO team, thank you for trusting us and being part of this journey.
-            <br /><br />
+            <br />
+            <br />
             <span className="text-primary font-semibold">Glory to God, because He lives!</span>
           </p>
         </div>
@@ -78,7 +79,6 @@ export function FundingSection() {
         <section>
           <ProductionTimelineChart />
         </section>
-
       </div>
 
       <div className="mt-16 text-center pt-8 border-t border-primary/20">

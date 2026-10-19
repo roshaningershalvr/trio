@@ -51,6 +51,14 @@ export default {
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);
     } catch (error) {
+      // Ignore normal client-initiated aborts (e.g. browser navigation, refresh)
+      if (
+        request.signal?.aborted ||
+        (error instanceof Error &&
+          (error.name === "AbortError" || error.message.includes("aborted")))
+      ) {
+        return new Response(null, { status: 499 });
+      }
       console.error(error);
       return new Response(renderErrorPage(), {
         status: 500,

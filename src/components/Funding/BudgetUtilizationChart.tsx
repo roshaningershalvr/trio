@@ -64,7 +64,9 @@ export function BudgetUtilizationChart() {
             </p>
           </div>
           <div className="border-l-2 border-purple-500 pl-4">
-            <p className="text-xs tracking-[0.2em] text-muted-foreground">POST PRODUCTION & PUBLICITY</p>
+            <p className="text-xs tracking-[0.2em] text-muted-foreground">
+              POST PRODUCTION & PUBLICITY
+            </p>
             <p className="text-2xl font-display text-purple-500">
               ₹{new Intl.NumberFormat("en-IN").format(postProductionCost)}
             </p>

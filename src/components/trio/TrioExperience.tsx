@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowRight, Menu, Play, X } from "lucide-react";
+import { ArrowDown, ArrowRight, ChevronLeft, ChevronRight, Menu, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trioContent as c, type MediaAsset } from "@/content/trio";
 import { cn } from "@/lib/utils";
@@ -59,21 +59,21 @@ function Intro({ onComplete }: { onComplete: () => void }) {
     return () => window.clearTimeout(id);
   }, [onComplete]);
   return (
-    <div className="intro-screen" aria-label="TRIO introduction">
+    <div className="intro-screen" aria-label="TRIO introduction" suppressHydrationWarning>
       <Button variant="ghost" size="sm" className="intro-skip" onClick={onComplete}>
         {c.intro.skip}
       </Button>
-      <div className="intro-sequence">
-        <p>{c.intro.presenter}</p>
-        <h1>
+      <div className="intro-sequence" suppressHydrationWarning>
+        <p suppressHydrationWarning>{c.intro.presenter}</p>
+        <h1 style={{ position: "relative" }} suppressHydrationWarning>
           <TitleMark className="intro-title-mark" priority />
         </h1>
-        <div className="intro-tagline">
+        <div className="intro-tagline" suppressHydrationWarning>
           {c.film.tagline.split("\n").map((line) => (
             <span key={line}>{line}</span>
           ))}
         </div>
-        <small>{c.intro.system}</small>
+        <small suppressHydrationWarning>{c.intro.system}</small>
       </div>
     </div>
   );
@@ -237,60 +237,561 @@ function TrailerModal({ open, onClose }: { open: boolean; onClose: () => void })
   );
 }
 
-function WorldCard({
-  card,
-  index,
-  active,
-  onToggle,
+function WorldMorphingGrid({
+  cards,
+  expandedIndex,
+  onSelectCard,
 }: {
-  card: { title: string; code: string; description: string; media: MediaAsset };
-  index: number;
-  active: boolean;
-  onToggle: () => void;
+  cards: typeof c.world.cards;
+  expandedIndex: number | null;
+  onSelectCard: (index: number | null) => void;
 }) {
-  const ref = useRef<HTMLButtonElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  const rotateX = useTransform(mouseYSpring, [-100, 100], [5, -5]);
-  const rotateY = useTransform(mouseXSpring, [-100, 100], [-5, 5]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
-  };
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  // Keyboard navigation when expanded
+  useEffect(() => {
+    if (expandedIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onSelectCard(null);
+      } else if (e.key === "ArrowLeft") {
+        onSelectCard((expandedIndex - 1 + cards.length) % cards.length);
+      } else if (e.key === "ArrowRight") {
+        onSelectCard((expandedIndex + 1) % cards.length);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [expandedIndex, cards.length, onSelectCard]);
 
   return (
-    <motion.button
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1200 }}
-      type="button"
-      className={cn("world-card glass-medium", active && "active")}
-      onClick={onToggle}
-      aria-expanded={active}
-      whileHover={{ z: 20, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 200, damping: 30 }}
-    >
-      <Placeholder media={card.media} />
-      <div className="world-index">0{index + 1}</div>
-      <div className="world-card-copy">
-        <small>{card.code}</small>
-        <h3>{card.title}</h3>
-        <p>{card.description}</p>
-        <span>
-          ACCESS FILE <ArrowRight />
-        </span>
-      </div>
-    </motion.button>
+    <div className="world-morph-grid" role="region" aria-label="World of TRIO Cards">
+      {cards.map((card, i) => {
+        const isExpanded = expandedIndex === i;
+        const isNeighbor = expandedIndex !== null && !isExpanded;
+        const isUnexpanded = expandedIndex === null;
+
+        // Dynamic position-aware flex sizing
+        // When unexpanded: all cards flex: 1 1 0% (equal 33.3%)
+        // When expanded: active card takes 74%, neighbors take 11.5% each
+        const flexStyle = isUnexpanded ? "1 1 0%" : isExpanded ? "0 0 74%" : "0 0 11.5%";
+
+        // Position-aware expansion direction:
+        // Left card (0): expands towards right
+        // Middle card (1): expands symmetrically in both directions
+        // Right card (2): expands towards left
+        const expandOrigin =
+          i === 0 ? "left center" : i === cards.length - 1 ? "right center" : "center center";
+        const contentEntranceX = i === 0 ? -24 : i === cards.length - 1 ? 24 : 0;
+
+        return (
+          <motion.div
+            key={card.title}
+            layout
+            style={{
+              flex: flexStyle,
+              transformOrigin: expandOrigin,
+            }}
+            transition={{
+              layout: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+            }}
+            className={cn(
+              "world-morph-card",
+              isUnexpanded && "is-unexpanded",
+              isExpanded && "is-expanded",
+              isNeighbor && "is-spine",
+            )}
+            onClick={() => {
+              if (!isExpanded) {
+                onSelectCard(i);
+              }
+            }}
+            role={isExpanded ? "region" : "button"}
+            tabIndex={isExpanded ? -1 : 0}
+            aria-expanded={isExpanded}
+            aria-label={isExpanded ? `${card.title} expanded file` : `Expand ${card.title} dossier`}
+            onKeyDown={(e) => {
+              if (!isExpanded && (e.key === "Enter" || e.key === " ")) {
+                e.preventDefault();
+                onSelectCard(i);
+              }
+            }}
+          >
+            {/* STATE 1: UNEXPANDED CARD (Initial horizontal row) */}
+            {isUnexpanded && (
+              <div className="world-unexpanded-inner">
+                <div className="world-card-image-wrap">
+                  {card.media.src ? (
+                    <motion.img
+                      layoutId={`world-card-img-${card.title}`}
+                      src={card.media.src}
+                      alt={card.media.alt}
+                      className={cn(
+                        "world-card-img",
+                        card.title === "DOMINOR" && "media-dominor",
+                        card.title === "THE TRIO" && "media-trio",
+                      )}
+                      loading="eager"
+                      decoding="sync"
+                    />
+                  ) : (
+                    <div
+                      role="img"
+                      aria-label={card.media.alt}
+                      className="placeholder-media h-full w-full"
+                    >
+                      <span>{card.media.label}</span>
+                    </div>
+                  )}
+                  <div className="world-card-gradient-overlay" />
+                </div>
+
+                <div className="world-unexpanded-index">0{i + 1}</div>
+
+                <div className="world-unexpanded-copy">
+                  <motion.h3
+                    layoutId={`world-card-title-${card.title}`}
+                    className="world-unexpanded-title"
+                  >
+                    {card.title}
+                  </motion.h3>
+                  <div className="world-unexpanded-cta">
+                    <span>
+                      ACCESS FILE <ArrowRight size={13} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* STATE 2: COLLAPSED NEIGHBOR SPINE */}
+            {isNeighbor && (
+              <div className="world-spine-inner">
+                {card.media.src ? (
+                  <img
+                    src={card.media.src}
+                    alt={card.media.alt}
+                    className={cn(
+                      "world-spine-img",
+                      card.title === "DOMINOR" && "media-dominor",
+                      card.title === "THE TRIO" && "media-trio",
+                    )}
+                  />
+                ) : (
+                  <div className="placeholder-media h-full w-full">
+                    <span className="text-[0.6rem]">{card.media.label}</span>
+                  </div>
+                )}
+                <div className="world-spine-overlay" />
+                <div className="world-spine-content">
+                  <span className="world-spine-num">0{i + 1}</span>
+                  <span className="world-spine-title">{card.title}</span>
+                  <span className="world-spine-hint">EXPAND</span>
+                </div>
+              </div>
+            )}
+
+            {/* STATE 3: ACTIVE EXPANDED CARD */}
+            {isExpanded && (
+              <div className="world-expanded-inner">
+                {/* Stage B — Image transformation: Left side with smooth feathered gradient blend */}
+                <div
+                  className={cn(
+                    "world-expanded-image-pane",
+                    card.title === "DOMINOR" && "media-dominor",
+                    card.title === "THE TRIO" && "media-trio",
+                  )}
+                >
+                  {card.media.src ? (
+                    <motion.img
+                      layoutId={`world-card-img-${card.title}`}
+                      src={card.media.src}
+                      alt={card.media.alt}
+                      className={cn(
+                        "world-expanded-img",
+                        card.title === "DOMINOR" && "media-dominor",
+                        card.title === "THE TRIO" && "media-trio",
+                      )}
+                      loading="eager"
+                      decoding="sync"
+                    />
+                  ) : (
+                    <div
+                      role="img"
+                      aria-label={card.media.alt}
+                      className="placeholder-media h-full w-full"
+                    >
+                      <span>{card.media.label}</span>
+                    </div>
+                  )}
+                  {/* Seamless feathered blend overlay */}
+                  <div className="world-expanded-image-blend" />
+                </div>
+
+                {/* Stage C & D — Title & Content reveal on the right side */}
+                <motion.div
+                  key={`content-${card.title}`}
+                  className="world-expanded-content-pane"
+                  initial={{ opacity: 0, x: contentEntranceX, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="world-expanded-scroll-wrap">
+                    <div className="world-expanded-header">
+                      <div className="world-expanded-top-bar">
+                        <motion.h3
+                          layoutId={`world-card-title-${card.title}`}
+                          className="world-expanded-title"
+                        >
+                          {card.title}
+                        </motion.h3>
+
+                        <button
+                          type="button"
+                          className="world-morph-close-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectCard(null);
+                          }}
+                          aria-label="Collapse card"
+                          title="Collapse card (Esc)"
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+
+                      {card.subtitle && (
+                        <span className="world-expanded-subtitle">{card.subtitle}</span>
+                      )}
+                    </div>
+
+                    <div className="world-expanded-body">
+                      {card.details.map((paragraph, pIdx) => (
+                        <p key={pIdx}>
+                          {paragraph.split(/(\*[^*]+\*)/g).map((chunk, cIdx) => {
+                            if (chunk.startsWith("*") && chunk.endsWith("*")) {
+                              return <em key={cIdx}>{chunk.slice(1, -1)}</em>;
+                            }
+                            return chunk;
+                          })}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Dynamic Navigation */}
+                  <div className="world-expanded-footer">
+                    <button
+                      type="button"
+                      className="world-morph-nav-arrow"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectCard((i - 1 + cards.length) % cards.length);
+                      }}
+                      aria-label="Previous file"
+                      title="Previous file"
+                    >
+                      <ChevronLeft size={16} />
+                    </button>
+
+                    <div className="world-morph-dots">
+                      {cards.map((cItem, dIdx) => (
+                        <button
+                          key={cItem.title}
+                          type="button"
+                          aria-label={`Jump to ${cItem.title}`}
+                          className={cn("world-morph-dot", dIdx === i && "active")}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectCard(dIdx);
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="world-morph-nav-arrow"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectCard((i + 1) % cards.length);
+                      }}
+                      aria-label="Next file"
+                      title="Next file"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ThreeMorphingGrid({
+  people,
+  expandedIndex,
+  onSelectPerson,
+}: {
+  people: typeof c.characters.people;
+  expandedIndex: number | null;
+  onSelectPerson: (index: number | null) => void;
+}) {
+  // Keyboard navigation when expanded
+  useEffect(() => {
+    if (expandedIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onSelectPerson(null);
+      } else if (e.key === "ArrowLeft") {
+        onSelectPerson((expandedIndex - 1 + people.length) % people.length);
+      } else if (e.key === "ArrowRight") {
+        onSelectPerson((expandedIndex + 1) % people.length);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [expandedIndex, people.length, onSelectPerson]);
+
+  return (
+    <div className="world-morph-grid" role="region" aria-label="The Three Central Figures">
+      {people.map((person, i) => {
+        const isExpanded = expandedIndex === i;
+        const isNeighbor = expandedIndex !== null && !isExpanded;
+        const isUnexpanded = expandedIndex === null;
+
+        const flexStyle = isUnexpanded ? "1 1 0%" : isExpanded ? "0 0 74%" : "0 0 11.5%";
+
+        const expandOrigin =
+          i === 0 ? "left center" : i === people.length - 1 ? "right center" : "center center";
+        const contentEntranceX = i === 0 ? -24 : i === people.length - 1 ? 24 : 0;
+
+        return (
+          <motion.div
+            key={person.name}
+            layout
+            style={{
+              flex: flexStyle,
+              transformOrigin: expandOrigin,
+            }}
+            transition={{
+              layout: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+            }}
+            className={cn(
+              "world-morph-card",
+              isUnexpanded && "is-unexpanded",
+              isExpanded && "is-expanded",
+              isNeighbor && "is-spine",
+            )}
+            onClick={() => {
+              if (!isExpanded) {
+                onSelectPerson(i);
+              }
+            }}
+            role={isExpanded ? "region" : "button"}
+            tabIndex={isExpanded ? -1 : 0}
+            aria-expanded={isExpanded}
+            aria-label={
+              isExpanded ? `${person.name} expanded profile` : `Expand ${person.name} profile`
+            }
+            onKeyDown={(e) => {
+              if (!isExpanded && (e.key === "Enter" || e.key === " ")) {
+                e.preventDefault();
+                onSelectPerson(i);
+              }
+            }}
+          >
+            {/* STATE 1: UNEXPANDED CARD */}
+            {isUnexpanded && (
+              <div className="world-unexpanded-inner">
+                <div className="world-card-image-wrap">
+                  {person.image.src ? (
+                    <motion.img
+                      layoutId={`person-img-${person.name}`}
+                      src={person.image.src}
+                      alt={person.image.alt}
+                      className="world-card-img"
+                      loading="eager"
+                      decoding="sync"
+                    />
+                  ) : (
+                    <div
+                      role="img"
+                      aria-label={person.image.alt}
+                      className="placeholder-media h-full w-full"
+                    >
+                      <span>{person.image.label}</span>
+                    </div>
+                  )}
+                  <div className="world-card-gradient-overlay" />
+                </div>
+
+                <div className="world-unexpanded-index">0{i + 1}</div>
+
+                <div className="world-unexpanded-copy">
+                  <motion.h3
+                    layoutId={`person-title-${person.name}`}
+                    className="world-unexpanded-title"
+                  >
+                    {person.name}
+                  </motion.h3>
+                  <div className="world-unexpanded-cta">
+                    <span>
+                      VIEW PROFILE <ArrowRight size={13} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* STATE 2: COLLAPSED NEIGHBOR SPINE */}
+            {isNeighbor && (
+              <div className="world-spine-inner">
+                {person.image.src ? (
+                  <img src={person.image.src} alt={person.image.alt} className="world-spine-img" />
+                ) : (
+                  <div className="placeholder-media h-full w-full">
+                    <span className="text-[0.6rem]">{person.image.label}</span>
+                  </div>
+                )}
+                <div className="world-spine-overlay" />
+                <div className="world-spine-content">
+                  <span className="world-spine-num">0{i + 1}</span>
+                  <span className="world-spine-title">{person.name}</span>
+                  <span className="world-spine-hint">EXPAND</span>
+                </div>
+              </div>
+            )}
+
+            {/* STATE 3: ACTIVE EXPANDED CARD */}
+            {isExpanded && (
+              <div className="world-expanded-inner">
+                {/* Left Portrait Column with subtle feathered edge */}
+                <div className="world-expanded-image-pane">
+                  {person.image.src ? (
+                    <motion.img
+                      layoutId={`person-img-${person.name}`}
+                      src={person.image.src}
+                      alt={person.image.alt}
+                      className="world-expanded-img"
+                      loading="eager"
+                      decoding="sync"
+                    />
+                  ) : (
+                    <div
+                      role="img"
+                      aria-label={person.image.alt}
+                      className="placeholder-media h-full w-full"
+                    >
+                      <span>{person.image.label}</span>
+                    </div>
+                  )}
+                  <div className="world-expanded-image-blend" />
+                </div>
+
+                {/* Right Content Column */}
+                <motion.div
+                  key={`person-content-${person.name}`}
+                  className="world-expanded-content-pane"
+                  initial={{ opacity: 0, x: contentEntranceX, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="world-expanded-scroll-wrap">
+                    <div className="world-expanded-header">
+                      <div className="world-expanded-top-bar">
+                        <motion.h3
+                          layoutId={`person-title-${person.name}`}
+                          className="world-expanded-title"
+                        >
+                          {person.name}
+                        </motion.h3>
+
+                        <button
+                          type="button"
+                          className="world-morph-close-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectPerson(null);
+                          }}
+                          aria-label="Collapse profile"
+                          title="Collapse (Esc)"
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+
+                      {person.role && (
+                        <span className="world-expanded-subtitle">{person.role}</span>
+                      )}
+                    </div>
+
+                    <div className="world-expanded-body">
+                      {person.details.map((paragraph, pIdx) => (
+                        <p key={pIdx}>
+                          {paragraph.split(/(\*[^*]+\*)/g).map((chunk, cIdx) => {
+                            if (chunk.startsWith("*") && chunk.endsWith("*")) {
+                              return <em key={cIdx}>{chunk.slice(1, -1)}</em>;
+                            }
+                            return chunk;
+                          })}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Dynamic Navigation */}
+                  <div className="world-expanded-footer">
+                    <button
+                      type="button"
+                      className="world-morph-nav-arrow"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectPerson((i - 1 + people.length) % people.length);
+                      }}
+                      aria-label="Previous profile"
+                      title="Previous profile"
+                    >
+                      <ChevronLeft size={16} />
+                    </button>
+
+                    <div className="world-morph-dots">
+                      {people.map((pItem, dIdx) => (
+                        <button
+                          key={pItem.name}
+                          type="button"
+                          aria-label={`Jump to ${pItem.name}`}
+                          className={cn("world-morph-dot", dIdx === i && "active")}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectPerson(dIdx);
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="world-morph-nav-arrow"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectPerson((i + 1) % people.length);
+                      }}
+                      aria-label="Next profile"
+                      title="Next profile"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </motion.div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -433,7 +934,8 @@ export function TrioExperience() {
   const [intro, setIntro] = useState(true);
   const [trailer, setTrailer] = useState(false);
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const [activeWorld, setActiveWorld] = useState<number | null>(null);
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [expandedPerson, setExpandedPerson] = useState<number | null>(null);
   const once = useRef(false);
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 1000], [0, 250]);
@@ -460,8 +962,28 @@ export function TrioExperience() {
     visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } },
   };
 
+  const blurMorph: any = {
+    hidden: {
+      opacity: 0,
+      filter: "blur(28px)",
+      y: 14,
+      scale: 0.96,
+    },
+    visible: (custom: number) => ({
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 1.8,
+        delay: custom * 0.85 + 0.3,
+        ease: [0.16, 1, 0.3, 1] as any,
+      },
+    }),
+  };
+
   return (
-    <div className="trio-site" id="top">
+    <div className="trio-site" id="top" suppressHydrationWarning>
       <AtmosphericBackground />
       {intro && <Intro onComplete={() => setIntro(false)} />}
       <Navigation onWatch={openTrailer} />
@@ -492,6 +1014,7 @@ export function TrioExperience() {
                 },
               }}
               id="hero-title"
+              suppressHydrationWarning
             >
               <TitleMark className="hero-title-mark" priority />
             </motion.h1>
@@ -590,63 +1113,12 @@ export function TrioExperience() {
             <h2 className="display-heading">{c.world.heading}</h2>
             <p>{c.world.copy}</p>
           </div>
-          <div className="world-grid">
-            {c.world.cards.map((card, i) => (
-              <WorldCard
-                key={card.title}
-                card={card}
-                index={i}
-                active={activeWorld === i}
-                onToggle={() => setActiveWorld(activeWorld === i ? null : i)}
-              />
-            ))}
-          </div>
+          <WorldMorphingGrid
+            cards={c.world.cards}
+            expandedIndex={expandedCard}
+            onSelectCard={setExpandedCard}
+          />
         </motion.section>
-
-        <section id="the-three" className="characters-section section-wrap">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="mb-24 md:mb-32 lg:mb-40"
-          >
-            <SectionLabel>{c.characters.label}</SectionLabel>
-            <h2 className="display-heading">{c.characters.heading}</h2>
-          </motion.div>
-          <div className="character-grid">
-            {c.characters.people.map((person, i) => (
-              <motion.article
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-5%" }}
-                variants={{
-                  hidden: { opacity: 0, y: 50, scale: 0.95 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    transition: { duration: 1.2, delay: i * 0.1, ease: [0.2, 0.8, 0.4, 1] as any },
-                  },
-                }}
-                className="character"
-                key={person.name}
-              >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 1 }}
-                  className="h-full w-full"
-                >
-                  <Placeholder media={person.image} />
-                </motion.div>
-                <div className="character-info glass-soft">
-                  <span>SUBJECT / 0{i + 1}</span>
-                  <h3>{person.name}</h3>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </section>
 
         <section className="quote-break">
           <motion.div
@@ -784,43 +1256,79 @@ export function TrioExperience() {
               <span key={line}>{line}</span>
             ))}
           </h2>
-          <div className="vision-copy">
-            {c.vision.copy.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-          </div>
-          <div className="vision-signature">
-            <strong>{c.creators.title}</strong>
-            <span>×</span>
-            <strong>{c.film.studio}</strong>
-          </div>
-        </motion.section>
-
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-10%" }}
-          variants={fadeUp}
-          className="creators-section section-wrap"
-        >
-          <div className="creators-mark">
-            <h2>{c.creators.title}</h2>
-            <p>{c.creators.subtitle}</p>
-          </div>
-          <div className="creators-copy">
-            <p>{c.creators.copy}</p>
-            <div>
-              {c.creators.names.map((name, i) => (
-                <span key={name}>
-                  <small>0{i + 1}</small>
-                  {name}
-                </span>
+          <div className="vision-body">
+            <div className="vision-signature">
+              <strong>{c.creators.title}</strong>
+              <span>×</span>
+              <strong>{c.film.studio}</strong>
+            </div>
+            <div className="vision-copy">
+              {c.vision.copy.map((p) => (
+                <p key={p}>{p}</p>
               ))}
             </div>
           </div>
         </motion.section>
 
         <FundingSection />
+
+        <section id="the-three" className="characters-section section-wrap">
+          <div className="mb-12 sm:mb-20 md:mb-32 lg:mb-40">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-10%" }}
+              variants={fadeUp}
+            >
+              <SectionLabel>{c.characters.label}</SectionLabel>
+            </motion.div>
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-10%" }}
+              className="the-three-heading tracking-tight"
+            >
+              <motion.span custom={0} variants={blurMorph} className="phrase-item">
+                THREE MEN.
+              </motion.span>
+              <motion.span custom={1} variants={blurMorph} className="phrase-item phrase-red">
+                ONE GOD.
+              </motion.span>
+              <motion.span custom={2} variants={blurMorph} className="phrase-item">
+                ONE STAND.
+              </motion.span>
+            </motion.h2>
+          </div>
+          <ThreeMorphingGrid
+            people={c.characters.people}
+            expandedIndex={expandedPerson}
+            onSelectPerson={setExpandedPerson}
+          />
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+            variants={fadeUp}
+            className="creators-section mt-24 md:mt-36 lg:mt-44"
+          >
+            <div className="creators-mark">
+              <h2>{c.creators.title}</h2>
+              <p>{c.creators.subtitle}</p>
+            </div>
+            <div className="creators-copy">
+              <p>{c.creators.copy}</p>
+              <div>
+                {c.creators.names.map((name, i) => (
+                  <span key={name}>
+                    <small>0{i + 1}</small>
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </section>
 
         <motion.section
           initial="hidden"
@@ -860,24 +1368,40 @@ export function TrioExperience() {
             </h2>
             <p>{c.creators.subtitle}</p>
           </div>
-          <div className="credits-list">
+          <dl className="credits-list">
             {c.credits.map((credit, i) => (
               <div key={`${credit.role}-${i}`}>
                 <dt>{credit.role}</dt>
                 <dd>
-                  {credit.names.map((name) => (
-                    <span key={name}>{name}</span>
-                  ))}
+                  {credit.names.map((name) => {
+                    const parts = name.split(" as ");
+                    if (parts.length === 2) {
+                      return (
+                        <span key={name} className="credits-entry">
+                          <span className="credits-actor">{parts[0]}</span>
+                          <span className="credits-role text-muted-foreground font-normal">
+                            as {parts[1]}
+                          </span>
+                        </span>
+                      );
+                    }
+                    return <span key={name}>{name}</span>;
+                  })}
                 </dd>
               </div>
             ))}
-          </div>
+          </dl>
         </section>
 
         <section className="final-section">
           <div>
             <p>{c.finalMessage[0]}</p>
-            <h2>{c.finalMessage[1]}</h2>
+            <h2>
+              {c.finalMessage[1].replace("HE LIVES!", "")}
+              <span className="text-muted-foreground" style={{ color: "var(--muted-foreground)" }}>
+                HE LIVES!
+              </span>
+            </h2>
           </div>
           <div className="final-lockup">
             <TitleMark className="final-title-mark" />

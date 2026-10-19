@@ -50,7 +50,11 @@ export function FundingKPIs({
         {[
           { label: "TOTAL CONTRIBUTION", value: totalFunding, color: "text-blue-400" },
           { label: "PRODUCTION & SET WORKS", value: productionCost, color: "text-red-400" },
-          { label: "POST PRODUCTION & PUBLICITY", value: postProductionCost, color: "text-purple-400" },
+          {
+            label: "POST PRODUCTION & PUBLICITY",
+            value: postProductionCost,
+            color: "text-purple-400",
+          },
         ].map((kpi, i) => (
           <motion.div
             key={kpi.label}

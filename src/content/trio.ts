@@ -36,9 +36,10 @@ export const trioContent = {
   navigation: [
     { label: "STORY", href: "#story" },
     { label: "WORLD", href: "#world" },
-    { label: "THE THREE", href: "#the-three" },
+    { label: "BEHIND TRIO", href: "#behind" },
     { label: "VISION", href: "#vision" },
     { label: "FUNDING & CONTRIBUTION", href: "#funding" },
+    { label: "THE THREE", href: "#the-three" },
     { label: "WATCH", href: "#watch" },
   ],
   ctas: { watch: "WATCH THE TEASER", explore: "EXPLORE TRIO" },
@@ -70,8 +71,12 @@ export const trioContent = {
     cards: [
       {
         title: "DOMINOR",
+        subtitle: "When a man demands the worship that belongs to God alone",
         code: "CLASSIFIED / FILE 01",
         description: "The corporate authority at the center of a world built on total compliance.",
+        details: [
+          "In TRIO, Dominor represents the biblical Antichrist in Revelation 13, Dominor embodies counterfeit divinity and absolute worldly power. Through Operation D6, he seeks to unite the world under one system, demanding not merely obedience, but worship. His name evokes *dominion* — the desire to rule and control all.",
+        ],
         media: {
           src: "/images/WORLD/DOMINOR 2.JPG",
           alt: "Dominor",
@@ -79,24 +84,27 @@ export const trioContent = {
         },
       },
       {
-        title: "ACT 138A",
-        code: "MANDATE / FILE 02",
-        description: "A law that turns public allegiance into an unavoidable act of submission.",
-        media: placeholder("ACT 138A", "Act 138A world artwork"),
+        title: "OPERATION D6",
+        subtitle: "",
+        code: "MANDATE & SYSTEM / FILE 02",
+        description:
+          "The state protocol combining Act 138A with the D6 economic system—an absolute identity and financial grid controlling who may buy, sell, work, and survive.",
+        details: [
+          "Operation D6 is Dominor’s ultimate blueprint for global domination, developed under 6S6 Global, his multinational corporation. The name *D6* stands for *Dominor 6*, with the number six symbolically echoing the mark of the Beast 666 in biblical prophecy of Revelation 13. Through the D6 implant, Dominor seeks to control identity, finances, and access to the global economy — transforming technological advancement into an instrument of absolute control. What begins as a promise of progress becomes a demand for submission: accept the system, worship Dominor, or be excluded from society.",
+        ],
+        media: placeholder("OPERATION D6", "Operation D6"),
       },
       {
-        title: "D6 ECONOMIC CARD",
-        code: "D6 DATABASE / FILE 03",
-        description: "An identity system controlling who may buy, sell, work and participate.",
-        media: placeholder("D6 SYSTEM", "D6 economic card artwork"),
-      },
-      {
-        title: "THE THREE",
-        code: "ACCESS RESTRICTED",
+        title: "THE TRIO",
+        subtitle: "SHADRACH, MESHACH & ABED",
+        code: "ACCESS RESTRICTED / FILE 03",
         description: "Three men whose refusal exposes the limit of a system built to own belief.",
+        details: [
+          "Three individuals united by one conviction: their allegiance belongs to God alone. Inspired by the biblical account in Daniel 3, they stand against Dominor’s demand for absolute submission, refusing to bow to a false god even when threatened with death. In a world where survival demands conformity, their unwavering faith becomes an act of defiance. They may stand alone against the world, but they will never stand apart from their God — proving that true faith never bows to a false god.",
+        ],
         media: {
           src: "/images/WORLD/TRIO 2.png",
-          alt: "THE THREE",
+          alt: "THE TRIO",
           label: "The three central figures",
         },
       },
@@ -104,17 +112,33 @@ export const trioContent = {
   },
   characters: {
     label: "03 / THE THREE",
-    heading: "THREE MEN.\nONE STAND.\nONE GOD.",
+    heading: "THREE MEN. ONE GOD. ONE STAND.",
+    phrases: ["THREE MEN.", "ONE GOD.", "ONE STAND."],
     people: [
       {
-        name: "Jeshurun Paul Moses",
-        image: placeholder("PORTRAIT 01", "Jeshurun Paul Moses in TRIO"),
+        name: "JESHURUN PAUL",
+        role: "Writer & Director",
+        details: [
+          "Jeshurun Paul is a filmmaker passionate about visual storytelling and exploring the Christian faith through cinema. Through TRIO, he offers a contemporary retelling of a timeless biblical account, exploring the cost of unwavering faith in a world that demands conformity. As screenplay and dialogue writer, director, executive producer, and editor, he shapes the film from its earliest words to its final cut.",
+        ],
+        image: placeholder("PORTRAIT 01", "Jeshurun Paul in TRIO"),
       },
       {
-        name: "Jabin Jason Samuel",
-        image: placeholder("PORTRAIT 02", "Jabin Jason Samuel in TRIO"),
+        name: "JABIN SAMUEL",
+        role: "Music Producer",
+        details: [
+          "Jabin Samuel plays a significant role in shaping TRIO, contributing to its musical identity as well as its script and ideation. As music producer, he helps establish the film’s sonic atmosphere and emotional intensity, while his creative input contributes to the story’s development. He also portrays Meshak, bringing one of the film’s central characters to life on screen.",
+        ],
+        image: placeholder("PORTRAIT 02", "Jabin Samuel in TRIO"),
       },
-      { name: "Jeremy Gladson", image: placeholder("PORTRAIT 03", "Jeremy Gladson in TRIO") },
+      {
+        name: "JEREMY GLADSON",
+        role: "Creative Manager",
+        details: [
+          "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Creative Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",
+        ],
+        image: placeholder("PORTRAIT 03", "Jeremy Gladson in TRIO"),
+      },
     ],
   },
   quote: ["THEY CAN CONTROL THE SYSTEM.", "BUT NOT THEIR FAITH."],
@@ -125,7 +149,7 @@ export const trioContent = {
     stages: [
       { name: "CONCEPT", completion: 100 },
       { name: "PRODUCTION", completion: 100 },
-      { name: "POST PRODUCTION", completion: 2 },
+      { name: "POST PRODUCTION", completion: 40 },
       { name: "FINAL FILM", completion: 70 },
     ],
     images: Array.from({ length: 7 }, (_, index) =>
@@ -147,7 +171,7 @@ export const trioContent = {
     title: "J³",
     subtitle: "A J³ FILM",
     copy: "Jeshurun, Jabin and Jeremy form a collaborative filmmaking identity united by faith, craft and a shared vision for the screen.",
-    names: ["JESHURUN", "JABIN", "JEREMY"],
+    names: ["JESHURUN PAUL", "JABIN SAMUEL", "JEREMY GLADSON"],
   },
   trailer: {
     eyebrow: "THE WORLD OF TRIO AWAITS.",
@@ -158,21 +182,20 @@ export const trioContent = {
     {
       role: "CAST",
       names: [
-        "Jeshurun Paul Moses",
-        "Jabin Jason Samuel",
-        "Jeremy Gladson",
-        "Leon Daniel",
-        "Priyan Frank",
-        "Jason Brendan",
-        "Raj Vijay",
+        "Jeshurun as Shadrack",
+        "Jabin as Meshak",
+        "Jeremy as Abed",
+        "Leon Daniel as Nezzar",
+        "Priyan Frank as Felix",
+        "Jason Brendan as Victor",
+        "Raj Vijay as James",
       ],
     },
-    { role: "DIRECTOR / SCREENPLAY", names: ["Jeshurun Paul Moses"] },
+    { role: "WRITER & DIRECTOR", names: ["Jeshurun Paul Moses"] },
     { role: "DIRECTOR OF PHOTOGRAPHY", names: ["Richard Davidson"] },
-    { role: "ORIGINAL SCORE", names: ["Jabsam Musicals"] },
-    { role: "OST SUPERVISOR", names: ["Jabin Samuel"] },
+    { role: "ORIGINAL SCORE", names: ["Jabin Jason Samuel"] },
     { role: "CREATIVE DIRECTION & PRODUCTION MANAGER", names: ["Jeremy Gladson"] },
-    { role: "EDITING / VFX / PUBLICITY DESIGN", names: ["Jeshurun Paul Moses"] },
+    { role: "EDITING / VFX / PUBLICITY DESIGN", names: ["Jeshurun Paul"] },
     { role: "PRODUCED BY", names: ["Bible Way Galaxy"] },
     { role: "", names: ["FUNDED BY PEOPLE WHO BELIEVED IN OUR MINISTRY"] },
   ],
