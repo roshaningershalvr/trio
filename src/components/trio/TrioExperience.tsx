@@ -282,6 +282,11 @@ function WorldMorphingGrid({
           i === 0 ? "left center" : i === cards.length - 1 ? "right center" : "center center";
         const contentEntranceX = i === 0 ? -24 : i === cards.length - 1 ? 24 : 0;
 
+        const cardTransition: any = {
+          duration: 0.85,
+          ease: [0.22, 1, 0.36, 1],
+        };
+
         return (
           <motion.div
             key={card.title}
@@ -291,7 +296,7 @@ function WorldMorphingGrid({
               transformOrigin: expandOrigin,
             }}
             transition={{
-              layout: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+              layout: cardTransition,
             }}
             className={cn(
               "world-morph-card",
@@ -322,6 +327,7 @@ function WorldMorphingGrid({
                   {card.media.src ? (
                     <motion.img
                       layoutId={`world-card-img-${card.title}`}
+                      transition={cardTransition}
                       src={card.media.src}
                       alt={card.media.alt}
                       className={cn(
@@ -349,15 +355,21 @@ function WorldMorphingGrid({
                 <div className="world-unexpanded-copy">
                   <motion.h3
                     layoutId={`world-card-title-${card.title}`}
+                    transition={cardTransition}
                     className="world-unexpanded-title"
                   >
                     {card.title}
                   </motion.h3>
-                  <div className="world-unexpanded-cta">
+                  <motion.div
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.15 }}
+                    className="world-unexpanded-cta"
+                  >
                     <span>
                       ACCESS FILE <ArrowRight size={13} />
                     </span>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             )}
@@ -366,7 +378,9 @@ function WorldMorphingGrid({
             {isNeighbor && (
               <div className="world-spine-inner">
                 {card.media.src ? (
-                  <img
+                  <motion.img
+                    layoutId={`world-card-img-${card.title}`}
+                    transition={cardTransition}
                     src={card.media.src}
                     alt={card.media.alt}
                     className={cn(
@@ -381,11 +395,16 @@ function WorldMorphingGrid({
                   </div>
                 )}
                 <div className="world-spine-overlay" />
-                <div className="world-spine-content">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.12 }}
+                  className="world-spine-content"
+                >
                   <span className="world-spine-num">0{i + 1}</span>
                   <span className="world-spine-title">{card.title}</span>
                   <span className="world-spine-hint">EXPAND</span>
-                </div>
+                </motion.div>
               </div>
             )}
 
@@ -403,6 +422,7 @@ function WorldMorphingGrid({
                   {card.media.src ? (
                     <motion.img
                       layoutId={`world-card-img-${card.title}`}
+                      transition={cardTransition}
                       src={card.media.src}
                       alt={card.media.alt}
                       className={cn(
@@ -430,15 +450,17 @@ function WorldMorphingGrid({
                 <motion.div
                   key={`content-${card.title}`}
                   className="world-expanded-content-pane"
-                  initial={{ opacity: 0, x: contentEntranceX, filter: "blur(4px)" }}
+                  initial={{ opacity: 0, x: contentEntranceX, filter: "blur(6px)" }}
                   animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                  transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.65, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div className="world-expanded-scroll-wrap">
                     <div className="world-expanded-header">
                       <div className="world-expanded-top-bar">
                         <motion.h3
                           layoutId={`world-card-title-${card.title}`}
+                          transition={cardTransition}
                           className="world-expanded-title"
                         >
                           {card.title}
@@ -577,6 +599,11 @@ function ThreeMorphingGrid({
           i === 0 ? "left center" : i === people.length - 1 ? "right center" : "center center";
         const contentEntranceX = i === 0 ? -24 : i === people.length - 1 ? 24 : 0;
 
+        const cardTransition: any = {
+          duration: 0.85,
+          ease: [0.22, 1, 0.36, 1],
+        };
+
         return (
           <motion.div
             key={person.name}
@@ -586,7 +613,7 @@ function ThreeMorphingGrid({
               transformOrigin: expandOrigin,
             }}
             transition={{
-              layout: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+              layout: cardTransition,
             }}
             className={cn(
               "world-morph-card",
@@ -619,6 +646,7 @@ function ThreeMorphingGrid({
                   {personImage.src ? (
                     <motion.img
                       layoutId={`person-img-${person.name}`}
+                      transition={cardTransition}
                       src={personImage.src}
                       alt={personImage.alt}
                       className="world-card-img"
@@ -643,15 +671,21 @@ function ThreeMorphingGrid({
                 <div className="world-unexpanded-copy">
                   <motion.h3
                     layoutId={`person-title-${person.name}`}
+                    transition={cardTransition}
                     className="world-unexpanded-title"
                   >
                     {person.name}
                   </motion.h3>
-                  <div className="world-unexpanded-cta">
+                  <motion.div
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.15 }}
+                    className="world-unexpanded-cta"
+                  >
                     <span>
                       VIEW PROFILE <ArrowRight size={13} />
                     </span>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             )}
@@ -660,7 +694,9 @@ function ThreeMorphingGrid({
             {isNeighbor && (
               <div className="world-spine-inner">
                 {personImage.src ? (
-                  <img
+                  <motion.img
+                    layoutId={`person-img-${person.name}`}
+                    transition={cardTransition}
                     src={personImage.src}
                     alt={personImage.alt}
                     className="world-spine-img"
@@ -672,11 +708,16 @@ function ThreeMorphingGrid({
                   </div>
                 )}
                 <div className="world-spine-overlay" />
-                <div className="world-spine-content">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.12 }}
+                  className="world-spine-content"
+                >
                   <span className="world-spine-num">0{i + 1}</span>
                   <span className="world-spine-title">{person.name}</span>
                   <span className="world-spine-hint">EXPAND</span>
-                </div>
+                </motion.div>
               </div>
             )}
 
@@ -688,6 +729,7 @@ function ThreeMorphingGrid({
                   {personImage.src ? (
                     <motion.img
                       layoutId={`person-img-${person.name}`}
+                      transition={cardTransition}
                       src={personImage.src}
                       alt={personImage.alt}
                       className="world-expanded-img"
@@ -711,15 +753,17 @@ function ThreeMorphingGrid({
                 <motion.div
                   key={`person-content-${person.name}`}
                   className="world-expanded-content-pane"
-                  initial={{ opacity: 0, x: contentEntranceX, filter: "blur(4px)" }}
+                  initial={{ opacity: 0, x: contentEntranceX, filter: "blur(6px)" }}
                   animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                  transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.65, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div className="world-expanded-scroll-wrap">
                     <div className="world-expanded-header">
                       <div className="world-expanded-top-bar">
                         <motion.h3
                           layoutId={`person-title-${person.name}`}
+                          transition={cardTransition}
                           className="world-expanded-title"
                         >
                           {person.name}
