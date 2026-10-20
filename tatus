@@ -1,0 +1,55 @@
+[1mdiff --git a/src/content/trio.ts b/src/content/trio.ts[m
+[1mindex 3d90098..2ce0891 100644[m
+[1m--- a/src/content/trio.ts[m
+[1m+++ b/src/content/trio.ts[m
+[36m@@ -121,7 +121,7 @@[m [mexport const trioContent = {[m
+         details: [[m
+           "Jeshurun Paul is a filmmaker passionate about visual storytelling and exploring the Christian faith through cinema. Through TRIO, he offers a contemporary retelling of a timeless biblical account, exploring the cost of unwavering faith in a world that demands conformity. As screenplay and dialogue writer, director, executive producer, and editor, he shapes the film from its earliest words to its final cut.",[m
+         ],[m
+[31m-        image: placeholder("PORTRAIT 01", "Jeshurun Paul in TRIO"),[m
+[32m+[m[32m        image: "/images/J3 - 1.PNG", // Updated image path[cite: 5][m
+       },[m
+       {[m
+         name: "JABIN SAMUEL",[m
+[36m@@ -129,7 +129,7 @@[m [mexport const trioContent = {[m
+         details: [[m
+           "Jabin Samuel plays a significant role in shaping TRIO, contributing to its musical identity as well as its script and ideation. As music producer, he helps establish the film’s sonic atmosphere and emotional intensity, while his creative input contributes to the story’s development. He also portrays Meshak, bringing one of the film’s central characters to life on screen.",[m
+         ],[m
+[31m-        image: placeholder("PORTRAIT 02", "Jabin Samuel in TRIO"),[m
+[32m+[m[32m        image: "/images/J3 - 2.PNG", // Updated image path[cite: 5][m
+       },[m
+       {[m
+         name: "JEREMY GLADSON",[m
+[36m@@ -137,7 +137,7 @@[m [mexport const trioContent = {[m
+         details: [[m
+           "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Creative Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",[m
+         ],[m
+[31m-        image: placeholder("PORTRAIT 03", "Jeremy Gladson in TRIO"),[m
+[32m+[m[32m        image: "/images/J3 - 3.PNG", // Updated image path[cite: 5][m
+       },[m
+     ],[m
+   },[m
+[36m@@ -182,7 +182,7 @@[m [mexport const trioContent = {[m
+     {[m
+       role: "CAST",[m
+       names: [[m
+[31m-        "Jeshurun as Shadrack",[m
+[32m+[m[32m        "Jeshurun as Shadrach",[m
+         "Jabin as Meshak",[m
+         "Jeremy as Abed",[m
+         "Leon Daniel as Nezzar",[m
+[36m@@ -192,10 +192,12 @@[m [mexport const trioContent = {[m
+       ],[m
+     },[m
+     { role: "WRITER & DIRECTOR", names: ["Jeshurun Paul Moses"] },[m
+[31m-    { role: "DIRECTOR OF PHOTOGRAPHY", names: ["Richard Davidson"] },[m
+     { role: "ORIGINAL SCORE", names: ["Jabin Jason Samuel"] },[m
+     { role: "CREATIVE DIRECTION & PRODUCTION MANAGER", names: ["Jeremy Gladson"] },[m
+[31m-    { role: "EDITING / VFX / PUBLICITY DESIGN", names: ["Jeshurun Paul"] },[m
+[32m+[m[32m    { role: "DIRECTOR OF PHOTOGRAPHY", names: ["Richard Davidson"] },[m
+[32m+[m[32m    { role: "FILM WEB DESIGNER", names: ["Roshan Ingershal"] },[m
+[32m+[m[32m    { role: "DI-Colorist", names: ["Name to be added"] },[m
+[32m+[m[32m    { role: "EDITING, VFX & PUBLICITY DESIGN", names: ["Jeshurun Paul Moses"] },[m
+     { role: "PRODUCED BY", names: ["Bible Way Galaxy"] },[m
+     { role: "", names: ["FUNDED BY PEOPLE WHO BELIEVED IN OUR MINISTRY"] },[m
+   ],[m

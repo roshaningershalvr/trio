@@ -121,7 +121,7 @@ export const trioContent = {
         details: [
           "Jeshurun Paul is a filmmaker passionate about visual storytelling and exploring the Christian faith through cinema. Through TRIO, he offers a contemporary retelling of a timeless biblical account, exploring the cost of unwavering faith in a world that demands conformity. As screenplay and dialogue writer, director, executive producer, and editor, he shapes the film from its earliest words to its final cut.",
         ],
-        image: placeholder("PORTRAIT 01", "Jeshurun Paul in TRIO"),
+        image: "/images/J3 - 1.PNG", // Updated image path[cite: 5]
       },
       {
         name: "JABIN SAMUEL",
@@ -129,7 +129,7 @@ export const trioContent = {
         details: [
           "Jabin Samuel plays a significant role in shaping TRIO, contributing to its musical identity as well as its script and ideation. As music producer, he helps establish the film’s sonic atmosphere and emotional intensity, while his creative input contributes to the story’s development. He also portrays Meshak, bringing one of the film’s central characters to life on screen.",
         ],
-        image: placeholder("PORTRAIT 02", "Jabin Samuel in TRIO"),
+        image: "/images/J3 - 2.PNG", // Updated image path[cite: 5]
       },
       {
         name: "JEREMY GLADSON",
@@ -137,7 +137,7 @@ export const trioContent = {
         details: [
           "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Creative Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",
         ],
-        image: placeholder("PORTRAIT 03", "Jeremy Gladson in TRIO"),
+        image: "/images/J3 - 3.PNG", // Updated image path[cite: 5]
       },
     ],
   },
@@ -182,7 +182,7 @@ export const trioContent = {
     {
       role: "CAST",
       names: [
-        "Jeshurun as Shadrack",
+        "Jeshurun as Shadrach",
         "Jabin as Meshak",
         "Jeremy as Abed",
         "Leon Daniel as Nezzar",
@@ -192,10 +192,12 @@ export const trioContent = {
       ],
     },
     { role: "WRITER & DIRECTOR", names: ["Jeshurun Paul Moses"] },
-    { role: "DIRECTOR OF PHOTOGRAPHY", names: ["Richard Davidson"] },
     { role: "ORIGINAL SCORE", names: ["Jabin Jason Samuel"] },
     { role: "CREATIVE DIRECTION & PRODUCTION MANAGER", names: ["Jeremy Gladson"] },
-    { role: "EDITING / VFX / PUBLICITY DESIGN", names: ["Jeshurun Paul"] },
+    { role: "DIRECTOR OF PHOTOGRAPHY", names: ["Richard Davidson"] },
+    { role: "FILM WEB DESIGNER", names: ["Roshan Ingershal"] },
+    { role: "DI-Colorist", names: ["Name to be added"] },
+    { role: "EDITING, VFX & PUBLICITY DESIGN", names: ["Jeshurun Paul Moses"] },
     { role: "PRODUCED BY", names: ["Bible Way Galaxy"] },
     { role: "", names: ["FUNDED BY PEOPLE WHO BELIEVED IN OUR MINISTRY"] },
   ],
