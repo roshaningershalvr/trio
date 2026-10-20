@@ -562,6 +562,15 @@ function ThreeMorphingGrid({
         const isNeighbor = expandedIndex !== null && !isExpanded;
         const isUnexpanded = expandedIndex === null;
 
+        const personImage: MediaAsset =
+          typeof person.image === "string"
+            ? { src: person.image, alt: `${person.name} in TRIO`, label: person.name }
+            : {
+                src: person.image.src || "",
+                alt: person.image.alt || `${person.name} in TRIO`,
+                label: person.image.label || person.name,
+              };
+
         const flexStyle = isUnexpanded ? "1 1 0%" : isExpanded ? "0 0 74%" : "0 0 11.5%";
 
         const expandOrigin =
@@ -607,22 +616,23 @@ function ThreeMorphingGrid({
             {isUnexpanded && (
               <div className="world-unexpanded-inner">
                 <div className="world-card-image-wrap">
-                  {person.image.src ? (
+                  {personImage.src ? (
                     <motion.img
                       layoutId={`person-img-${person.name}`}
-                      src={person.image.src}
-                      alt={person.image.alt}
+                      src={personImage.src}
+                      alt={personImage.alt}
                       className="world-card-img"
+                      style={{ objectPosition: "center 15%" }}
                       loading="eager"
                       decoding="sync"
                     />
                   ) : (
                     <div
                       role="img"
-                      aria-label={person.image.alt}
+                      aria-label={personImage.alt}
                       className="placeholder-media h-full w-full"
                     >
-                      <span>{person.image.label}</span>
+                      <span>{personImage.label}</span>
                     </div>
                   )}
                   <div className="world-card-gradient-overlay" />
@@ -649,11 +659,16 @@ function ThreeMorphingGrid({
             {/* STATE 2: COLLAPSED NEIGHBOR SPINE */}
             {isNeighbor && (
               <div className="world-spine-inner">
-                {person.image.src ? (
-                  <img src={person.image.src} alt={person.image.alt} className="world-spine-img" />
+                {personImage.src ? (
+                  <img
+                    src={personImage.src}
+                    alt={personImage.alt}
+                    className="world-spine-img"
+                    style={{ objectPosition: "center 15%" }}
+                  />
                 ) : (
                   <div className="placeholder-media h-full w-full">
-                    <span className="text-[0.6rem]">{person.image.label}</span>
+                    <span className="text-[0.6rem]">{personImage.label}</span>
                   </div>
                 )}
                 <div className="world-spine-overlay" />
@@ -670,22 +685,23 @@ function ThreeMorphingGrid({
               <div className="world-expanded-inner">
                 {/* Left Portrait Column with subtle feathered edge */}
                 <div className="world-expanded-image-pane">
-                  {person.image.src ? (
+                  {personImage.src ? (
                     <motion.img
                       layoutId={`person-img-${person.name}`}
-                      src={person.image.src}
-                      alt={person.image.alt}
+                      src={personImage.src}
+                      alt={personImage.alt}
                       className="world-expanded-img"
+                      style={{ objectPosition: "center 15%" }}
                       loading="eager"
                       decoding="sync"
                     />
                   ) : (
                     <div
                       role="img"
-                      aria-label={person.image.alt}
+                      aria-label={personImage.alt}
                       className="placeholder-media h-full w-full"
                     >
-                      <span>{person.image.label}</span>
+                      <span>{personImage.label}</span>
                     </div>
                   )}
                   <div className="world-expanded-image-blend" />
@@ -1073,28 +1089,35 @@ export function TrioExperience() {
           id="story"
           className="story-section section-wrap"
         >
-          <div className="story-grid">
-            <div>
-              <SectionLabel>{c.story.label}</SectionLabel>
-              <h2 className="display-heading">{c.story.heading}</h2>
-              <div className="story-copy">
-                {c.story.synopsis.map((p) => (
-                  <p key={p}>{p}</p>
+          <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none z-0">
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+            </div>
+            <div className="relative z-10">
+              <div className="story-grid">
+                <div>
+                  <SectionLabel>{c.story.label}</SectionLabel>
+                  <h2 className="display-heading">{c.story.heading}</h2>
+                  <div className="story-copy">
+                    {c.story.synopsis.map((p) => (
+                      <p key={p}>{p}</p>
+                    ))}
+                  </div>
+                </div>
+                <div className="story-visual">
+                  <Placeholder media={c.story.media} />
+                  <div className="frame-code">FRAME 138A / ARCHIVE</div>
+                </div>
+              </div>
+              <div className="story-beats">
+                {c.story.beats.map((beat, i) => (
+                  <div key={beat}>
+                    <small>0{i + 1}</small>
+                    <strong>{beat}</strong>
+                  </div>
                 ))}
               </div>
             </div>
-            <div className="story-visual">
-              <Placeholder media={c.story.media} />
-              <div className="frame-code">FRAME 138A / ARCHIVE</div>
-            </div>
-          </div>
-          <div className="story-beats">
-            {c.story.beats.map((beat, i) => (
-              <div key={beat}>
-                <small>0{i + 1}</small>
-                <strong>{beat}</strong>
-              </div>
-            ))}
           </div>
         </motion.section>
 
@@ -1108,16 +1131,23 @@ export function TrioExperience() {
           id="world"
           className="world-section section-wrap"
         >
-          <SectionLabel>{c.world.label}</SectionLabel>
-          <div className="section-intro">
-            <h2 className="display-heading">{c.world.heading}</h2>
-            <p>{c.world.copy}</p>
+          <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none z-0">
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+            </div>
+            <div className="relative z-10">
+              <SectionLabel>{c.world.label}</SectionLabel>
+              <div className="section-intro">
+                <h2 className="display-heading">{c.world.heading}</h2>
+                <p>{c.world.copy}</p>
+              </div>
+              <WorldMorphingGrid
+                cards={c.world.cards}
+                expandedIndex={expandedCard}
+                onSelectCard={setExpandedCard}
+              />
+            </div>
           </div>
-          <WorldMorphingGrid
-            cards={c.world.cards}
-            expandedIndex={expandedCard}
-            onSelectCard={setExpandedCard}
-          />
         </motion.section>
 
         <section className="quote-break">
@@ -1156,91 +1186,6 @@ export function TrioExperience() {
           </motion.div>
         </section>
 
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-10%" }}
-          variants={fadeUp}
-          id="behind"
-          className="behind-section section-wrap"
-        >
-          <SectionLabel>{c.behind.label}</SectionLabel>
-          <div className="section-intro">
-            <h2 className="display-heading">{c.behind.heading}</h2>
-            <p>{c.behind.copy}</p>
-          </div>
-          <ol className="production-timeline">
-            {c.behind.stages.map((stage, i) => (
-              <li key={stage.name}>
-                <div className="pr-8 flex flex-col h-full justify-between pb-4">
-                  <div>
-                    <span className="text-primary text-xs tracking-[0.25em] block mb-2 font-mono">
-                      0{i + 1} // FILE.SYS
-                    </span>
-                    <strong className="block text-4xl sm:text-[2.5rem] font-display font-bold uppercase tracking-wide mb-6 text-white">
-                      {stage.name}
-                    </strong>
-                  </div>
-
-                  <div className="mt-8">
-                    <div className="flex justify-between items-end mb-3">
-                      <span className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
-                        {stage.completion === 100 ? "VERIFIED" : "CALCULATING"}
-                      </span>
-                      <span className="font-display text-5xl leading-none font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
-                        {stage.completion}
-                        <span className="text-primary text-2xl ml-1">%</span>
-                      </span>
-                    </div>
-
-                    <div className="h-6 w-full bg-background/80 border border-white/10 rounded-sm relative p-[2px] overflow-hidden shadow-[inset_0_2px_15px_rgba(0,0,0,0.9)] backdrop-blur-md">
-                      <div className="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,transparent_0%,transparent_calc(100%-1px),#fff_calc(100%-1px))] bg-[length:6px_100%]" />
-
-                      <motion.div
-                        className="h-full relative rounded-[1px]"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${stage.completion}%` }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 1.8,
-                          delay: i * 0.2 + 0.2,
-                          ease: [0.16, 1, 0.3, 1] as any,
-                        }}
-                        style={{
-                          boxShadow: "0 0 25px var(--primary)",
-                          background:
-                            "linear-gradient(90deg, var(--primary) 0%, oklch(0.65 0.22 27) 100%)",
-                        }}
-                      >
-                        <div className="absolute top-0 right-0 w-1.5 h-full bg-white opacity-90 shadow-[0_0_10px_white]" />
-                        <div className="absolute inset-x-0 top-0 h-[1px] bg-white/40" />
-                      </motion.div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className="bts-gallery">
-            {c.behind.images.map((image, i) => (
-              <button
-                key={image.label}
-                type="button"
-                onClick={() => setLightbox(i)}
-                aria-label={`Open ${image.label}`}
-                className="group relative overflow-hidden"
-              >
-                <Placeholder
-                  media={image}
-                  className="transition-transform duration-[800ms] group-hover:scale-105"
-                />
-                <span className="glass-soft font-medium px-3 py-1.5 rounded-sm">
-                  SCENE {String(i + 1).padStart(2, "0")} / PRODUCTION
-                </span>
-              </button>
-            ))}
-          </div>
-        </motion.section>
 
         <motion.section
           initial="hidden"
@@ -1250,84 +1195,191 @@ export function TrioExperience() {
           id="vision"
           className="vision-section section-wrap"
         >
-          <SectionLabel>{c.vision.label}</SectionLabel>
-          <h2 className="vision-heading">
-            {c.vision.heading.split("\n").map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-          </h2>
-          <div className="vision-body">
-            <div className="vision-signature">
-              <strong>{c.creators.title}</strong>
-              <span>×</span>
-              <strong>{c.film.studio}</strong>
+          <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none z-0">
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
             </div>
-            <div className="vision-copy">
-              {c.vision.copy.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
+            <div className="relative z-10">
+              <SectionLabel>{c.vision.label}</SectionLabel>
+              <h2 className="vision-heading">
+                {c.vision.heading.split("\n").map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+              </h2>
+              <div className="vision-body">
+                <div className="vision-signature">
+                  <strong>{c.creators.title}</strong>
+                  <span>×</span>
+                  <strong>{c.film.studio}</strong>
+                </div>
+                <div className="vision-copy">
+                  {c.vision.copy.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </motion.section>
 
         <FundingSection />
 
-        <section id="the-three" className="characters-section section-wrap">
-          <div className="mb-12 sm:mb-20 md:mb-32 lg:mb-40">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-10%" }}
-              variants={fadeUp}
-            >
-              <SectionLabel>{c.characters.label}</SectionLabel>
-            </motion.div>
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-10%" }}
-              className="the-three-heading tracking-tight"
-            >
-              <motion.span custom={0} variants={blurMorph} className="phrase-item">
-                THREE MEN.
-              </motion.span>
-              <motion.span custom={1} variants={blurMorph} className="phrase-item phrase-red">
-                ONE GOD.
-              </motion.span>
-              <motion.span custom={2} variants={blurMorph} className="phrase-item">
-                ONE STAND.
-              </motion.span>
-            </motion.h2>
-          </div>
-          <ThreeMorphingGrid
-            people={c.characters.people}
-            expandedIndex={expandedPerson}
-            onSelectPerson={setExpandedPerson}
-          />
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-10%" }}
-            variants={fadeUp}
-            className="creators-section mt-24 md:mt-36 lg:mt-44"
-          >
-            <div className="creators-mark">
-              <h2>{c.creators.title}</h2>
-              <p>{c.creators.subtitle}</p>
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          variants={fadeUp}
+          id="behind"
+          className="behind-section section-wrap"
+        >
+          <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none z-0">
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
             </div>
-            <div className="creators-copy">
-              <p>{c.creators.copy}</p>
-              <div>
-                {c.creators.names.map((name, i) => (
-                  <span key={name}>
-                    <small>0{i + 1}</small>
-                    {name}
-                  </span>
+            <div className="relative z-10">
+              <SectionLabel>{c.behind.label}</SectionLabel>
+              <div className="section-intro">
+                <h2 className="display-heading">{c.behind.heading}</h2>
+                <p>{c.behind.copy}</p>
+              </div>
+              <ol className="production-timeline">
+                {c.behind.stages.map((stage, i) => (
+                  <li key={stage.name}>
+                    <div className="pr-8 flex flex-col h-full justify-between pb-4">
+                      <div>
+                        <span className="text-primary text-xs tracking-[0.25em] block mb-2 font-mono">
+                          0{i + 1} // FILE.SYS
+                        </span>
+                        <strong className="block text-4xl sm:text-[2.5rem] font-display font-bold uppercase tracking-wide mb-6 text-white">
+                          {stage.name}
+                        </strong>
+                      </div>
+
+                      <div className="mt-8">
+                        <div className="flex justify-between items-end mb-3">
+                          <span className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
+                            {stage.completion === 100 ? "VERIFIED" : "CALCULATING"}
+                          </span>
+                          <span className="font-display text-5xl leading-none font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+                            {stage.completion}
+                            <span className="text-primary text-2xl ml-1">%</span>
+                          </span>
+                        </div>
+
+                        <div className="h-6 w-full bg-background/80 border border-white/10 rounded-sm relative p-[2px] overflow-hidden shadow-[inset_0_2px_15px_rgba(0,0,0,0.9)] backdrop-blur-md">
+                          <div className="absolute inset-0 opacity-20 bg-[linear-gradient(90deg,transparent_0%,transparent_calc(100%-1px),#fff_calc(100%-1px))] bg-[length:6px_100%]" />
+
+                          <motion.div
+                            className="h-full relative rounded-[1px]"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${stage.completion}%` }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 1.8,
+                              delay: i * 0.2 + 0.2,
+                              ease: [0.16, 1, 0.3, 1] as any,
+                            }}
+                            style={{
+                              boxShadow: "0 0 25px var(--primary)",
+                              background:
+                                "linear-gradient(90deg, var(--primary) 0%, oklch(0.65 0.22 27) 100%)",
+                            }}
+                          >
+                            <div className="absolute top-0 right-0 w-1.5 h-full bg-white opacity-90 shadow-[0_0_10px_white]" />
+                            <div className="absolute inset-x-0 top-0 h-[1px] bg-white/40" />
+                          </motion.div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <div className="bts-gallery">
+                {c.behind.images.map((image, i) => (
+                  <button
+                    key={image.label}
+                    type="button"
+                    onClick={() => setLightbox(i)}
+                    aria-label={`Open ${image.label}`}
+                    className="group relative overflow-hidden"
+                  >
+                    <Placeholder
+                      media={image}
+                      className="transition-transform duration-[800ms] group-hover:scale-105"
+                    />
+                    <span className="glass-soft font-medium px-3 py-1.5 rounded-sm">
+                      SCENE {String(i + 1).padStart(2, "0")} / PRODUCTION
+                    </span>
+                  </button>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
+        </motion.section>
+
+        <section id="the-three" className="characters-section section-wrap">
+          <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none z-0">
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+            </div>
+            <div className="relative z-10">
+              <div className="mb-12 sm:mb-20 md:mb-32 lg:mb-40">
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-10%" }}
+                  variants={fadeUp}
+                >
+                  <SectionLabel>{c.characters.label}</SectionLabel>
+                </motion.div>
+                <motion.h2
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-10%" }}
+                  className="the-three-heading tracking-tight"
+                >
+                  <motion.span custom={0} variants={blurMorph} className="phrase-item">
+                    THREE MEN.
+                  </motion.span>
+                  <motion.span custom={1} variants={blurMorph} className="phrase-item phrase-red">
+                    ONE GOD.
+                  </motion.span>
+                  <motion.span custom={2} variants={blurMorph} className="phrase-item">
+                    ONE STAND.
+                  </motion.span>
+                </motion.h2>
+              </div>
+              <ThreeMorphingGrid
+                people={c.characters.people}
+                expandedIndex={expandedPerson}
+                onSelectPerson={setExpandedPerson}
+              />
+
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-10%" }}
+                variants={fadeUp}
+                className="creators-section mt-24 md:mt-36 lg:mt-44"
+              >
+                <div className="creators-mark">
+                  <h2>{c.creators.title}</h2>
+                  <p>{c.creators.subtitle}</p>
+                </div>
+                <div className="creators-copy">
+                  <p>{c.creators.copy}</p>
+                  <div>
+                    {c.creators.names.map((name, i) => (
+                      <span key={name}>
+                        <small>0{i + 1}</small>
+                        {name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </section>
 
         <motion.section

@@ -36,9 +36,9 @@ export const trioContent = {
   navigation: [
     { label: "STORY", href: "#story" },
     { label: "WORLD", href: "#world" },
-    { label: "BEHIND TRIO", href: "#behind" },
     { label: "VISION", href: "#vision" },
     { label: "FUNDING & CONTRIBUTION", href: "#funding" },
+    { label: "BEHIND TRIO", href: "#behind" },
     { label: "THE THREE", href: "#the-three" },
     { label: "WATCH", href: "#watch" },
   ],
@@ -111,7 +111,7 @@ export const trioContent = {
     ],
   },
   characters: {
-    label: "03 / THE THREE",
+    label: "06 / THE THREE",
     heading: "THREE MEN. ONE GOD. ONE STAND.",
     phrases: ["THREE MEN.", "ONE GOD.", "ONE STAND."],
     people: [
@@ -121,7 +121,11 @@ export const trioContent = {
         details: [
           "Jeshurun Paul is a filmmaker passionate about visual storytelling and exploring the Christian faith through cinema. Through TRIO, he offers a contemporary retelling of a timeless biblical account, exploring the cost of unwavering faith in a world that demands conformity. As screenplay and dialogue writer, director, executive producer, and editor, he shapes the film from its earliest words to its final cut.",
         ],
-        image: "/images/J3 - 1.PNG", // Updated image path[cite: 5]
+        image: {
+          src: "/images/J3 - 1.PNG",
+          alt: "Jeshurun Paul — Writer & Director",
+          label: "JESHURUN PAUL",
+        },
       },
       {
         name: "JABIN SAMUEL",
@@ -129,7 +133,11 @@ export const trioContent = {
         details: [
           "Jabin Samuel plays a significant role in shaping TRIO, contributing to its musical identity as well as its script and ideation. As music producer, he helps establish the film’s sonic atmosphere and emotional intensity, while his creative input contributes to the story’s development. He also portrays Meshak, bringing one of the film’s central characters to life on screen.",
         ],
-        image: "/images/J3 - 2.PNG", // Updated image path[cite: 5]
+        image: {
+          src: "/images/J3 - 2.PNG",
+          alt: "Jabin Samuel — Music Producer",
+          label: "JABIN SAMUEL",
+        },
       },
       {
         name: "JEREMY GLADSON",
@@ -137,13 +145,17 @@ export const trioContent = {
         details: [
           "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Creative Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",
         ],
-        image: "/images/J3 - 3.PNG", // Updated image path[cite: 5]
+        image: {
+          src: "/images/J3 - 3.PNG",
+          alt: "Jeremy Gladson — Creative Manager",
+          label: "JEREMY GLADSON",
+        },
       },
     ],
   },
   quote: ["THEY CAN CONTROL THE SYSTEM.", "BUT NOT THEIR FAITH."],
   behind: {
-    label: "04 / BEHIND TRIO",
+    label: "05 / BEHIND TRIO",
     heading: "FROM SCRIPT\nTO SCREEN.",
     copy: "TRIO is an independently produced film shaped through faith, collaboration and ambitious filmmaking.",
     stages: [
@@ -160,11 +172,10 @@ export const trioContent = {
     ),
   },
   vision: {
-    label: "05 / THE VISION",
+    label: "03 / THE VISION",
     heading: "REDEFINING\nCHRISTIAN CINEMA.",
     copy: [
-      "TRIO — Redefining Christian Cinema by J³ Cube",
-      "TRIO is more than a film; it is a bold vision to redefine Christian cinema for a generation that deserves stories as powerful in their storytelling as they are profound in their faith. Crafted by J³ Cube, TRIO brings together cinematic excellence, gripping suspense, thought-provoking world-building, and uncompromising biblical truth to create an experience that transcends conventions and challenges expectations. Rooted in the prophetic imagery of Daniel 3 and Revelation 13, this Christian thriller confronts the cost of conviction in a world that demands conformity, asking a timeless question: When the world chooses to bow, will you stand? With a commitment to innovation, excellence, and Christ-centred storytelling, J³ Cube seeks to push the boundaries of Christian filmmaking—not merely to tell stories about faith, but to bring faith to life through cinema. This is TRIO. This is J³ Cube. And this is Christian cinema reimagined.",
+      "TRIO is more than a film; it is a bold vision to redefine Christian cinema for a generation that deserves stories as powerful in their storytelling as they are profound in their faith. Crafted by J³, TRIO brings together cinematic excellence, gripping suspense, thought-provoking world-building, and uncompromising biblical truth to create an experience that transcends conventions and challenges expectations. Rooted in the prophetic imagery of Daniel 3 and Revelation 13, this Christian thriller confronts the cost of conviction in a world that demands conformity, asking a timeless question: When the world chooses to bow, will you stand? With a commitment to innovation, excellence, and Christ-centred storytelling, J³ seeks to push the boundaries of Christian filmmaking—not merely to tell stories about faith, but to bring faith to life through cinema. This is TRIO. This is J³. And this is Christian cinema reimagined.",
     ],
   },
   creators: {

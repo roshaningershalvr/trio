@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import { motion } from "framer-motion";
 import { FundingKPIs } from "./FundingKPIs";
 import { FundingDonutChart } from "./FundingDonutChart";
@@ -7,8 +8,8 @@ import { ExpenseCategoryCards } from "./ExpenseCategoryCards";
 import { ProductionTimelineChart } from "./ProductionTimelineChart";
 import { OVERVIEW_METRICS } from "@/lib/funding-data";
 
-function SectionLabel({ children }: { children: string }) {
-  return <p className="section-label">{children}</p>;
+function SectionLabel({ children, style }: { children: string; style?: React.CSSProperties }) {
+  return <p className="section-label" style={style}>{children}</p>;
 }
 
 export function FundingSection() {
@@ -31,7 +32,7 @@ export function FundingSection() {
         <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] bg-teal-500/5 blur-[100px] rounded-full mix-blend-screen" />
       </div>
 
-      <SectionLabel>TRANSPARENCY REPORT</SectionLabel>
+      <SectionLabel style={{ marginBottom: "0.75rem" }}>TRANSPARENCY REPORT</SectionLabel>
       <div className="section-intro mb-16">
         <h2 className="display-heading mb-6 tracking-tight">
           <span className="block text-primary">FUNDING &</span>
