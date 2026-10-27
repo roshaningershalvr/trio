@@ -76,7 +76,7 @@ export function ProductionTimelineChart() {
       className="w-full glass-soft p-4 md:p-8 rounded-xl border border-primary/10 mt-8 mb-8 relative overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full mix-blend-screen" />
+        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.06)_0%,transparent_70%)]" />
       </div>
 
       <h3 className="relative z-10 text-xl md:text-2xl font-display tracking-widest text-center mb-8 uppercase text-primary/90">
@@ -99,6 +99,14 @@ export function ProductionTimelineChart() {
               axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
               tickLine={false}
               dy={10}
+              tickFormatter={(val: string) => {
+                if (!val) return "";
+                const match = val.match(/([A-Za-z]+)\s+(\d+)/);
+                if (match && match[1] && match[2]) {
+                  return `${match[1].slice(0, 3)} ${match[2]}`;
+                }
+                return val;
+              }}
             />
             <YAxis
               tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 11 }}

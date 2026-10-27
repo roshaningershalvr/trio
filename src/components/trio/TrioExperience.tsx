@@ -341,10 +341,10 @@ function WorldMorphingGrid({
                   ) : (
                     <div
                       role="img"
-                      aria-label={card.media.alt}
+                      aria-label={(card.media as MediaAsset).alt}
                       className="placeholder-media h-full w-full"
                     >
-                      <span>{card.media.label}</span>
+                      <span>{(card.media as MediaAsset).label}</span>
                     </div>
                   )}
                   <div className="world-card-gradient-overlay" />
@@ -391,7 +391,7 @@ function WorldMorphingGrid({
                   />
                 ) : (
                   <div className="placeholder-media h-full w-full">
-                    <span className="text-[0.6rem]">{card.media.label}</span>
+                    <span className="text-[0.6rem]">{(card.media as MediaAsset).label}</span>
                   </div>
                 )}
                 <div className="world-spine-overlay" />
@@ -436,10 +436,10 @@ function WorldMorphingGrid({
                   ) : (
                     <div
                       role="img"
-                      aria-label={card.media.alt}
+                      aria-label={(card.media as MediaAsset).alt}
                       className="placeholder-media h-full w-full"
                     >
-                      <span>{card.media.label}</span>
+                      <span>{(card.media as MediaAsset).label}</span>
                     </div>
                   )}
                   {/* Seamless feathered blend overlay */}
@@ -857,7 +857,7 @@ function ThreeMorphingGrid({
 
 const AtmosphericBackground = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 mix-blend-screen">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {/* Cool grey cinematic haze */}
       <motion.div
         animate={{
@@ -865,7 +865,7 @@ const AtmosphericBackground = () => {
           y: ["-10vh", "20vh", "5vh", "-10vh"],
         }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute -top-[20%] -left-[10%] w-[70vw] h-[60vh] rounded-full bg-[radial-gradient(circle,rgba(200,220,255,0.02)_0%,transparent_70%)] blur-[80px]"
+        className="absolute -top-[20%] -left-[10%] w-[70vw] h-[60vh] rounded-full bg-[radial-gradient(circle,rgba(200,220,255,0.015)_0%,transparent_70%)]"
       />
       {/* Subtle red signal/flare */}
       <motion.div
@@ -875,47 +875,32 @@ const AtmosphericBackground = () => {
           scale: [1, 1.2, 0.9, 1],
         }}
         transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[40%] right-[10%] w-[50vw] h-[50vh] rounded-full bg-[radial-gradient(circle,rgba(255,60,60,0.03)_0%,transparent_70%)] blur-[100px]"
+        className="absolute top-[40%] right-[10%] w-[50vw] h-[50vh] rounded-full bg-[radial-gradient(circle,rgba(255,60,60,0.025)_0%,transparent_70%)]"
       />
 
-      {/* Floating HUD tracking crosses for empty space filling */}
+      {/* Floating HUD tracking crosses for subtle atmosphere */}
       <div className="absolute inset-0">
         <motion.div
-          animate={{ opacity: [0.1, 0.5, 0.1] }}
+          animate={{ opacity: [0.1, 0.4, 0.1] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-[25%] left-[8%] w-4 h-4 border-t border-l border-primary/40"
         />
         <motion.div
-          animate={{ opacity: [0.1, 0.6, 0.1] }}
+          animate={{ opacity: [0.1, 0.5, 0.1] }}
           transition={{ duration: 6, repeat: Infinity, delay: 2, ease: "easeInOut" }}
           className="absolute bottom-[20%] right-[12%] w-4 h-4 border-b border-r border-primary/40"
         />
 
         <motion.div
-          animate={{ opacity: [0.05, 0.3, 0.05] }}
+          animate={{ opacity: [0.05, 0.25, 0.05] }}
           transition={{ duration: 5, repeat: Infinity, delay: 1, ease: "easeInOut" }}
           className="absolute top-[65%] left-[15%] w-1.5 h-1.5 rounded-full bg-primary/30"
         />
         <motion.div
-          animate={{ opacity: [0.05, 0.3, 0.05] }}
+          animate={{ opacity: [0.05, 0.25, 0.05] }}
           transition={{ duration: 3, repeat: Infinity, delay: 0.5, ease: "easeInOut" }}
           className="absolute bottom-[35%] right-[25%] w-1.5 h-1.5 rounded-full bg-primary/30"
         />
-
-        <motion.div
-          animate={{ opacity: [0.05, 0.4, 0.05] }}
-          transition={{ duration: 7, repeat: Infinity, delay: 3, ease: "easeInOut" }}
-          className="absolute top-[18%] right-[22%] text-[0.45rem] tracking-[0.4em] font-sans font-medium text-primary/30"
-        >
-          D6_SYS_TRACKING
-        </motion.div>
-        <motion.div
-          animate={{ opacity: [0.05, 0.3, 0.05] }}
-          transition={{ duration: 8, repeat: Infinity, delay: 1.5, ease: "easeInOut" }}
-          className="absolute bottom-[10%] left-[8%] text-[0.45rem] tracking-[0.4em] font-sans font-medium text-primary/30"
-        >
-          MANDATE_138A_ACTIVE
-        </motion.div>
       </div>
     </div>
   );
@@ -1023,23 +1008,32 @@ export function TrioExperience() {
   };
 
   const blurMorph: any = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 1.0,
+        delayChildren: 0.4,
+      },
+    },
+  };
+
+  const blurMorphItem: any = {
     hidden: {
       opacity: 0,
-      filter: "blur(28px)",
-      y: 14,
-      scale: 0.96,
+      filter: "blur(32px)",
+      y: 20,
+      scale: 0.94,
     },
-    visible: (custom: number) => ({
+    visible: {
       opacity: 1,
       filter: "blur(0px)",
       y: 0,
       scale: 1,
       transition: {
-        duration: 1.8,
-        delay: custom * 0.85 + 0.3,
+        duration: 3.0,
         ease: [0.16, 1, 0.3, 1] as any,
       },
-    }),
+    },
   };
 
   return (
@@ -1135,7 +1129,7 @@ export function TrioExperience() {
         >
           <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none z-0">
-              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,var(--primary)/8%_0%,transparent_70%)]" />
             </div>
             <div className="relative z-10">
               <div className="story-grid">
@@ -1177,7 +1171,7 @@ export function TrioExperience() {
         >
           <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none z-0">
-              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,var(--primary)/8%_0%,transparent_70%)]" />
             </div>
             <div className="relative z-10">
               <SectionLabel>{c.world.label}</SectionLabel>
@@ -1230,7 +1224,6 @@ export function TrioExperience() {
           </motion.div>
         </section>
 
-
         <motion.section
           initial="hidden"
           whileInView="visible"
@@ -1241,7 +1234,7 @@ export function TrioExperience() {
         >
           <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none z-0">
-              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,var(--primary)/8%_0%,transparent_70%)]" />
             </div>
             <div className="relative z-10">
               <SectionLabel>{c.vision.label}</SectionLabel>
@@ -1278,7 +1271,7 @@ export function TrioExperience() {
         >
           <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none z-0">
-              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,var(--primary)/8%_0%,transparent_70%)]" />
             </div>
             <div className="relative z-10">
               <SectionLabel>{c.behind.label}</SectionLabel>
@@ -1364,7 +1357,7 @@ export function TrioExperience() {
         <section id="the-three" className="characters-section section-wrap">
           <div className="w-full glass-soft p-6 sm:p-8 md:p-12 lg:p-16 rounded-xl border border-primary/10 relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none z-0">
-              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full mix-blend-screen" />
+              <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,var(--primary)/8%_0%,transparent_70%)]" />
             </div>
             <div className="relative z-10">
               <div className="mb-12 sm:mb-20 md:mb-32 lg:mb-40">
@@ -1376,22 +1369,25 @@ export function TrioExperience() {
                 >
                   <SectionLabel>{c.characters.label}</SectionLabel>
                 </motion.div>
-                <motion.h2
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-10%" }}
-                  className="the-three-heading tracking-tight"
-                >
-                  <motion.span custom={0} variants={blurMorph} className="phrase-item">
-                    THREE MEN.
-                  </motion.span>
-                  <motion.span custom={1} variants={blurMorph} className="phrase-item phrase-red">
-                    ONE GOD.
-                  </motion.span>
-                  <motion.span custom={2} variants={blurMorph} className="phrase-item">
-                    ONE STAND.
-                  </motion.span>
-                </motion.h2>
+                <div className="three-heading-container">
+                  <motion.h2
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-10%" }}
+                    variants={blurMorph}
+                    className="the-three-heading tracking-tight"
+                  >
+                    <motion.span variants={blurMorphItem} className="phrase-item">
+                      THREE MEN.
+                    </motion.span>
+                    <motion.span variants={blurMorphItem} className="phrase-item phrase-red">
+                      ONE GOD.
+                    </motion.span>
+                    <motion.span variants={blurMorphItem} className="phrase-item">
+                      ONE STAND.
+                    </motion.span>
+                  </motion.h2>
+                </div>
               </div>
               <ThreeMorphingGrid
                 people={c.characters.people}

@@ -92,7 +92,11 @@ export const trioContent = {
         details: [
           "Operation D6 is Dominor’s ultimate blueprint for global domination, developed under 6S6 Global, his multinational corporation. The name *D6* stands for *Dominor 6*, with the number six symbolically echoing the mark of the Beast 666 in biblical prophecy of Revelation 13. Through the D6 implant, Dominor seeks to control identity, finances, and access to the global economy — transforming technological advancement into an instrument of absolute control. What begins as a promise of progress becomes a demand for submission: accept the system, worship Dominor, or be excluded from society.",
         ],
-        media: placeholder("OPERATION D6", "Operation D6"),
+        media: {
+          src: "/images/WORLD/OPERATION D6.jpg",
+          alt: "Operation D6",
+          label: "OPERATION D6",
+        },
       },
       {
         title: "THE TRIO",
@@ -122,7 +126,7 @@ export const trioContent = {
           "Jeshurun Paul is a filmmaker passionate about visual storytelling and exploring the Christian faith through cinema. Through TRIO, he offers a contemporary retelling of a timeless biblical account, exploring the cost of unwavering faith in a world that demands conformity. As screenplay and dialogue writer, director, executive producer, and editor, he shapes the film from its earliest words to its final cut.",
         ],
         image: {
-          src: "/images/J3 - 1.PNG",
+          src: "/images/J3 - 1.png",
           alt: "Jeshurun Paul — Writer & Director",
           label: "JESHURUN PAUL",
         },
@@ -134,7 +138,7 @@ export const trioContent = {
           "Jabin Samuel plays a significant role in shaping TRIO, contributing to its musical identity as well as its script and ideation. As music producer, he helps establish the film’s sonic atmosphere and emotional intensity, while his creative input contributes to the story’s development. He also portrays Meshak, bringing one of the film’s central characters to life on screen.",
         ],
         image: {
-          src: "/images/J3 - 2.PNG",
+          src: "/images/J3 - 2.png",
           alt: "Jabin Samuel — Music Producer",
           label: "JABIN SAMUEL",
         },
@@ -146,7 +150,7 @@ export const trioContent = {
           "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Creative Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",
         ],
         image: {
-          src: "/images/J3 - 3.PNG",
+          src: "/images/J3 - 3.png",
           alt: "Jeremy Gladson — Creative Manager",
           label: "JEREMY GLADSON",
         },
@@ -207,7 +211,7 @@ export const trioContent = {
     { role: "CREATIVE DIRECTION & PRODUCTION MANAGER", names: ["Jeremy Gladson"] },
     { role: "DIRECTOR OF PHOTOGRAPHY", names: ["Richard Davidson"] },
     { role: "FILM WEB DESIGNER", names: ["Roshan Ingershal"] },
-    { role: "DI-Colorist", names: ["Name to be added"] },
+    { role: "DI-Colorist", names: ["Agrim Punia"] },
     { role: "EDITING, VFX & PUBLICITY DESIGN", names: ["Jeshurun Paul Moses"] },
     { role: "PRODUCED BY", names: ["Bible Way Galaxy"] },
     { role: "", names: ["FUNDED BY PEOPLE WHO BELIEVED IN OUR MINISTRY"] },

@@ -9,7 +9,11 @@ import { ProductionTimelineChart } from "./ProductionTimelineChart";
 import { OVERVIEW_METRICS } from "@/lib/funding-data";
 
 function SectionLabel({ children, style }: { children: string; style?: React.CSSProperties }) {
-  return <p className="section-label" style={style}>{children}</p>;
+  return (
+    <p className="section-label" style={style}>
+      {children}
+    </p>
+  );
 }
 
 export function FundingSection() {
@@ -19,41 +23,44 @@ export function FundingSection() {
   };
 
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-10%" }}
-      variants={fadeUp}
+    <section
       id="funding"
-      className="section-wrap relative z-10 w-full max-w-[1200px] mx-auto px-6 py-24 md:py-32"
+      className="funding-section section-wrap relative z-10 w-full max-w-[1200px] mx-auto px-6"
     >
       <div className="absolute inset-0 pointer-events-none z-[-1] overflow-hidden">
-        <div className="absolute top-0 right-1/2 w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full mix-blend-screen" />
-        <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] bg-teal-500/5 blur-[100px] rounded-full mix-blend-screen" />
+        <div className="absolute -top-24 left-1/4 w-[600px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.05)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.03)_0%,transparent_70%)] pointer-events-none" />
       </div>
 
-      <SectionLabel style={{ marginBottom: "0.75rem" }}>TRANSPARENCY REPORT</SectionLabel>
-      <div className="section-intro mb-16">
-        <h2 className="display-heading mb-6 tracking-tight">
-          <span className="block text-primary">FUNDING &</span>
-          <span className="block text-white">CONTRIBUTION</span>
-        </h2>
-        <div>
-          <p className="text-xl text-muted-foreground leading-relaxed font-light mb-6">
-            Transparent Production Finance Overview
-          </p>
-          <p className="inline-block text-sm text-foreground/80 leading-relaxed border-l-2 border-primary/40 pl-4 bg-primary/5 p-4 rounded-r-md backdrop-blur-sm max-w-2xl mx-auto text-left">
-            TRIO would not have been possible without the incredible people who believed in this
-            vision and chose to stand with us. More than funding a film, you believed in our mission
-            to tell stories rooted in Scripture and use cinema for the glory of God. Every
-            contribution, big or small, helped bring this story from an idea to reality. From the
-            entire TRIO team, thank you for trusting us and being part of this journey.
-            <br />
-            <br />
-            <span className="text-primary font-semibold">Glory to God, because He lives!</span>
-          </p>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+      >
+        <SectionLabel style={{ marginBottom: "0.75rem" }}>04 / TRANSPARENCY REPORT</SectionLabel>
+        <div className="section-intro mb-16">
+          <h2 className="display-heading mb-6 tracking-tight">
+            <span className="block text-primary">FUNDING &</span>
+            <span className="block text-white">CONTRIBUTION</span>
+          </h2>
+          <div>
+            <p className="text-xl text-muted-foreground leading-relaxed font-light mb-6">
+              Transparent Production Finance Overview
+            </p>
+            <p className="inline-block text-sm text-foreground/80 leading-relaxed border-l-2 border-primary/40 pl-4 bg-primary/5 p-4 rounded-r-md backdrop-blur-sm max-w-2xl mx-auto text-left">
+              TRIO would not have been possible without the incredible people who believed in this
+              vision and chose to stand with us. More than funding a film, you believed in our
+              mission to tell stories rooted in Scripture and use cinema for the glory of God. Every
+              contribution, big or small, helped bring this story from an idea to reality. From the
+              entire TRIO team, thank you for trusting us and being part of this journey.
+              <br />
+              <br />
+              <span className="text-primary font-semibold">Glory to God, because He lives!</span>
+            </p>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col gap-12 w-full">
         {/* OVERVIEW */}
@@ -92,6 +99,6 @@ export function FundingSection() {
           of faith with the cinematic craft they deserve.
         </p>
       </div>
-    </motion.section>
+    </section>
   );
 }

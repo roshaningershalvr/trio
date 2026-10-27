@@ -28,10 +28,12 @@ export function ExpenseCategoryCards() {
             key={data.category}
             className="flex items-center justify-between p-3.5 sm:p-4 rounded-lg bg-white/5 border border-primary/10 gap-3"
           >
-            <span className="font-medium tracking-wide sm:tracking-wider uppercase text-xs sm:text-sm text-left whitespace-nowrap min-w-0">
+            <span className="font-medium tracking-wide sm:tracking-wider uppercase text-xs sm:text-sm text-left break-words min-w-0 pr-2">
               {data.category}
             </span>
-            <span className="font-mono text-base sm:text-lg shrink-0">{formatCurrency(data.total)}</span>
+            <span className="font-mono text-base sm:text-lg shrink-0">
+              {formatCurrency(data.total)}
+            </span>
           </div>
         ))}
       </div>

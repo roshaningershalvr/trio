@@ -25,7 +25,12 @@ export const TRANSACTIONS = [
   // PRODUCTION
   { date: "Wednesday, May 20, 2026", category: "EQUIPMENT ADVANCE", amount: 500, notes: "Day 1" },
   { date: "Friday, May 22, 2026", category: "EQUIPMENT ADVANCE", amount: 500, notes: "Day 2 & 3" },
-  { date: "", category: "PRODUCTION & SET WORKS", amount: 1150, notes: "" },
+  {
+    date: "Monday, May 25, 2026",
+    category: "PRODUCTION & SET WORKS",
+    amount: 1150,
+    notes: "Pre-Production Works",
+  },
   {
     date: "Wednesday, May 27, 2026",
     category: "PRODUCTION & SET WORKS",
