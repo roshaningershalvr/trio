@@ -573,6 +573,10 @@ footer a:hover {
   width: min(92%, 92rem);
   margin: 0 auto;
   padding: clamp(7rem, 14vw, 14rem) 0;
+  scroll-margin-top: 6.5rem;
+}
+section[id] {
+  scroll-margin-top: 6.5rem;
 }
 .section-label {
   margin: 0 0 3rem;
@@ -750,7 +754,7 @@ footer a:hover {
 .world-card-gradient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(4, 4, 7, 0.95) 0%, rgba(4, 4, 7, 0.4) 40%, transparent 75%);
+  background: linear-gradient(to top, rgba(4, 4, 7, 0.65) 0%, rgba(4, 4, 7, 0.2) 40%, transparent 65%);
   pointer-events: none;
 }
 
@@ -1198,17 +1202,27 @@ footer a:hover {
 .characters-section > .display-heading {
   margin-bottom: 5rem;
 }
+/* Container query context — font scales to actual inner width, not viewport */
+.three-heading-container {
+  container-type: inline-size;
+  width: 100%;
+}
+
 .the-three-heading {
   width: 100%;
-  max-width: none !important;
-  white-space: normal !important;
+  max-width: 100%;
+  white-space: nowrap;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  gap: clamp(0.5rem, 1.5vw, 2.5rem);
-  font: 700 clamp(3.2rem, 7.8vw, 9.2rem)/0.82 var(--font-display);
-  letter-spacing: -0.03em;
+  gap: clamp(0.5rem, 2cqi, 3rem);
+  /* 8.5cqi = 8.5% of the container's inline width → always fills the box */
+  font-size: 8.5cqi;
+  font-weight: 700;
+  line-height: 0.86;
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
   text-transform: uppercase;
   margin: 0;
   overflow: visible;
@@ -1223,29 +1237,26 @@ footer a:hover {
   color: var(--primary);
 }
 
-@media (max-width: 1024px) {
-  .the-three-heading {
-    font-size: clamp(2.4rem, 7vw, 5.5rem);
-    letter-spacing: -0.025em;
-  }
-}
-
-@media (max-width: 768px) {
+/* Mobile: stack vertically, use cqi for mobile too */
+@container (max-width: 520px) {
   .the-three-heading {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 0.35rem;
-    font-size: clamp(2.6rem, 12vw, 4.5rem);
+    white-space: normal;
+    gap: 0.3rem;
+    font-size: 14cqi;
     line-height: 0.88;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
   .the-three-heading .phrase-item {
     display: block;
     width: 100%;
     white-space: normal;
+    flex-shrink: 0;
   }
 }
+
 .character-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

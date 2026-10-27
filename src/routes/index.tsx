@@ -7,13 +7,13 @@ const description =
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TRIO — Official Film Website | Bible Way Galaxy" },
+      { title: "TRIO - Official Film Website | Bible Way Galaxy" },
       { name: "description", content: description },
-      { property: "og:title", content: "TRIO — Official Film Website" },
+      { property: "og:title", content: "TRIO - Official Film Website" },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "TRIO — Official Film Website" },
+      { name: "twitter:title", content: "TRIO - Official Film Website" },
       { name: "twitter:description", content: description },
     ],
     links: [
