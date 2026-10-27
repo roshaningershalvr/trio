@@ -1,18 +1,13 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { CONTRIBUTORS } from "@/lib/funding-data";
-import { motion } from "framer-motion";
 
 export function FundingDonutChart() {
   const specifiedContributions = CONTRIBUTORS.filter((c) => c.amount !== null) as {
     name: string;
     amount: number;
   }[];
-  const unspecifiedContributions = CONTRIBUTORS.filter((c) => c.amount === null);
 
   const total = specifiedContributions.reduce((sum, c) => sum + c.amount, 0);
-
-  // Group smaller contributions into "Others" for cleaner visualization if needed, but the prompt says
-  // "For smaller contributions, avoid cluttering the chart with overlapping labels. Use an external legend."
 
   // Custom cool cinematic colors
   const COLORS = [
@@ -27,6 +22,7 @@ export function FundingDonutChart() {
     "#14b8a6", // Teal
     "#84cc16", // Lime
     "#64748b", // Slate
+    "#f97316", // Orange
   ];
 
   return (
@@ -61,7 +57,9 @@ export function FundingDonutChart() {
                 ))}
               </Pie>
               <Tooltip
-                formatter={(value: number) => `₹${new Intl.NumberFormat("en-IN").format(value)}`}
+                formatter={(value: number) => [
+                  `₹${new Intl.NumberFormat("en-IN").format(value)}`, "Contribution",
+                ]}
                 contentStyle={{
                   backgroundColor: "rgba(0,0,0,0.8)",
                   border: "1px solid rgba(255,255,255,0.1)",
@@ -83,46 +81,23 @@ export function FundingDonutChart() {
           </div>
         </div>
 
-        {/* Legend — full width on mobile, constrained on desktop */}
-        <div className="flex flex-col gap-4 w-full max-w-sm mx-auto lg:mx-0">
-          <h4 className="text-sm tracking-[0.2em] text-muted-foreground border-b border-primary/20 pb-2 mb-2">
-            CONTRIBUTIONS RECEIVED
-          </h4>
-          <div className="max-h-[300px] overflow-y-auto pr-2 space-y-3 custom-scrollbar">
-            {specifiedContributions.map((entry, index) => (
-              <div key={entry.name} className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-3 h-3 rounded-full flex-shrink-0 shadow-[0_0_8px_rgba(0,0,0,0.5)]"
-                    style={{ backgroundColor: COLORS[index % COLORS.length] }}
-                  />
-                  <span
-                    className="text-foreground/90 font-medium truncate w-[130px]"
-                    title={entry.name}
-                  >
-                    {entry.name}
-                  </span>
-                </div>
-                <div className="flex gap-3">
-                  <span className="text-muted-foreground w-12 text-right text-xs">
-                    {((entry.amount / total) * 100).toFixed(1)}%
-                  </span>
-                  <span className="font-mono text-primary/80">
-                    ₹{new Intl.NumberFormat("en-IN").format(entry.amount)}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {unspecifiedContributions.length > 0 && (
-            <div className="mt-4 p-4 rounded-md bg-white/5 border border-white/10 text-xs text-muted-foreground tracking-wide leading-relaxed">
-              <span className="text-orange-400 font-semibold mb-1 block">NOTE:</span>
-              {unspecifiedContributions.map((c) => c.name).join(", ")} &mdash; contribution amount
-              not specified in source records.
-            </div>
-          )}
-        </div>
+        <ul
+          aria-label="Contribution amounts by chart color"
+          className="grid grid-cols-2 gap-x-8 gap-y-3 w-full max-w-xs mx-auto lg:mx-0 list-none p-0"
+        >
+          {specifiedContributions.map((entry, index) => (
+            <li key={entry.name} className="flex items-center gap-3 text-sm">
+              <span
+                aria-hidden="true"
+                className="w-3 h-3 rounded-full flex-shrink-0"
+                style={{ backgroundColor: COLORS[index % COLORS.length] }}
+              />
+              <span className="font-mono text-foreground/90">
+                ₹{new Intl.NumberFormat("en-IN").format(entry.amount)}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
