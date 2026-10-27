@@ -126,7 +126,7 @@ export const trioContent = {
           "Jeshurun Paul is a filmmaker passionate about visual storytelling and exploring the Christian faith through cinema. Through TRIO, he offers a contemporary retelling of a timeless biblical account, exploring the cost of unwavering faith in a world that demands conformity. As screenplay and dialogue writer, director, executive producer, and editor, he shapes the film from its earliest words to its final cut.",
         ],
         image: {
-          src: "/images/J3 - 1.png",
+          src: "/images/the-three/1.png",
           alt: "Jeshurun Paul — Writer & Director",
           label: "JESHURUN PAUL",
         },
@@ -138,7 +138,7 @@ export const trioContent = {
           "Jabin Samuel plays a significant role in shaping TRIO, contributing to its musical identity as well as its script and ideation. As music producer, he helps establish the film’s sonic atmosphere and emotional intensity, while his creative input contributes to the story’s development. He also portrays Meshak, bringing one of the film’s central characters to life on screen.",
         ],
         image: {
-          src: "/images/J3 - 2.png",
+          src: "/images/the-three/2.png",
           alt: "Jabin Samuel — Music Producer",
           label: "JABIN SAMUEL",
         },
@@ -150,7 +150,7 @@ export const trioContent = {
           "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Creative Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",
         ],
         image: {
-          src: "/images/J3 - 3.png",
+          src: "/images/the-three/3.png",
           alt: "Jeremy Gladson — Creative Manager",
           label: "JEREMY GLADSON",
         },
