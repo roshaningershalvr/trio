@@ -180,7 +180,7 @@ export const trioContent = {
       ([fileNumber, width, height], index) => ({
         width,
         height,
-        src: `/images/behind-trio/${fileNumber}.webp`,
+        src: `/images/behind-trio/${fileNumber}${fileNumber === 13 || fileNumber === 14 ? "-updated" : ""}.webp`,
         alt: `Behind the scenes of TRIO, scene ${index + 1}`,
         label: `Scene ${index + 1}`,
       }),
