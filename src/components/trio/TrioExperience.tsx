@@ -1196,7 +1196,7 @@ export function TrioExperience() {
                 </div>
                 <div className="story-visual">
                   <Placeholder media={c.story.media} />
-                  <div className="frame-code">FRAME 138A / ARCHIVE</div>
+                  <div className="frame-code">TRIO - First look poster</div>
                 </div>
               </div>
               <div className="story-beats">
