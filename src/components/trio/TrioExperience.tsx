@@ -1352,7 +1352,7 @@ export function TrioExperience() {
                       className="transition-transform duration-[800ms] group-hover:scale-105"
                     />
                     <span className="glass-soft font-medium text-[0.52rem] sm:text-[0.6rem] md:text-xs tracking-wider uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1.5 rounded-sm absolute left-2 bottom-2 sm:left-3 sm:bottom-3 md:left-4 md:bottom-4 whitespace-nowrap pointer-events-none inline-flex items-center justify-center leading-none max-w-[calc(100%-1rem)]">
-                      SCENE {String(i + 1).padStart(2, "0")} / PRODUCTION
+                      Scene {i + 1}
                     </span>
                   </button>
                 ))}

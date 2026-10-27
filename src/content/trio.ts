@@ -164,11 +164,13 @@ export const trioContent = {
       { name: "POST PRODUCTION", completion: 40 },
       { name: "FINAL FILM", completion: 70 },
     ],
-    images: Array.from({ length: 7 }, (_, index) =>
-      placeholder(
-        `PRODUCTION FRAME 0${index + 1}`,
-        `Behind the scenes of TRIO, frame ${index + 1}`,
-      ),
+    // Numeric source-filename order; the supplied shortlist has no image 8.
+    images: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
+      (fileNumber, index): MediaAsset => ({
+        src: `/images/behind-trio/${fileNumber}.webp`,
+        alt: `Behind the scenes of TRIO, scene ${index + 1}`,
+        label: `Scene ${index + 1}`,
+      }),
     ),
   },
   vision: {
