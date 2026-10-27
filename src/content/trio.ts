@@ -107,7 +107,7 @@ export const trioContent = {
           "Three individuals united by one conviction: their allegiance belongs to God alone. Inspired by the biblical account in Daniel 3, they stand against Dominor’s demand for absolute submission, refusing to bow to a false god even when threatened with death. In a world where survival demands conformity, their unwavering faith becomes an act of defiance. They may stand alone against the world, but they will never stand apart from their God — proving that true faith never bows to a false god.",
         ],
         media: {
-          src: "/images/WORLD/TRIO 2.png",
+          src: "/images/WORLD/trio-updated.png",
           alt: "THE TRIO",
           label: "The three central figures",
         },
