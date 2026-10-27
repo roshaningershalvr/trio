@@ -72,7 +72,7 @@ export const trioContent = {
   poster: firstLookArt,
   story: {
     label: "01 / THE STORY",
-    heading: "A WORLD HAS CHOSEN TO BOW.\nTHREE MEN CHOOSE TO STAND.",
+    heading: "THE WORLD HAS CHOSEN TO BOW.\nTHREE MEN CHOSE TO STAND.",
     synopsis: [
       "In a world where obedience is no longer requested but engineered, a new order measures loyalty through identity, access and surrender.",
       "Three men are faced with a single demand: bow with everyone else—or stand together for the God they refuse to deny.",

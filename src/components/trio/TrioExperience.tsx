@@ -1177,7 +1177,17 @@ export function TrioExperience() {
               <div className="story-grid">
                 <div>
                   <SectionLabel>{c.story.label}</SectionLabel>
-                  <h2 className="display-heading">{c.story.heading}</h2>
+                  <h2 className="display-heading">
+                    {c.story.heading.split("\n").map((line, index) => (
+                      <span
+                        key={line}
+                        className="block"
+                        style={index === 0 ? { color: "#B7191C" } : undefined}
+                      >
+                        {line}
+                      </span>
+                    ))}
+                  </h2>
                   <div className="story-copy">
                     {c.story.synopsis.map((p) => (
                       <p key={p}>{p}</p>
