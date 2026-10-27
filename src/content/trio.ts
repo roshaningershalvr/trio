@@ -17,6 +17,26 @@ export const trioLogo = {
   height: 750,
 } as const;
 
+const behindCaptions = [
+  "VFX test - Chroma key compositing",
+  "Look test & photoshoot",
+  "Scene 1 - Bike Tracking Shot",
+  "Scene 1 - Rig setup",
+  "Scene 3 - Intro sequence",
+  "Scene 4 - 6S6 global office",
+  "Scene 4 - Office setup",
+  "Scene 5 - Warehouse",
+  "Scene 5 - Warehouse setup",
+  "Stunt choreography",
+  "Stunt choreography",
+  "Scene 6 - Practical Vehicle Simulation",
+  "Scene 6 - Practical Vehicle Simulation",
+  "Scene 7 - Camera setup",
+  "Scene 7 - Pre-climax",
+  "Scene 7 - Rehearsal",
+  "Climax"
+];
+
 export const trioContent = {
   branding: {
     logo: trioLogo,
@@ -181,8 +201,8 @@ export const trioContent = {
         width,
         height,
         src: `/images/behind-trio/${fileNumber}${fileNumber === 13 || fileNumber === 14 ? "-updated" : ""}.webp`,
-        alt: `Behind the scenes of TRIO, scene ${index + 1}`,
-        label: `Scene ${index + 1}`,
+        alt: `Behind the scenes of TRIO: ${behindCaptions[index]}`,
+        label: behindCaptions[index],
       }),
     ),
   },

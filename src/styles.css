@@ -1393,6 +1393,10 @@ section[id] {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   pointer-events: none;
+  max-width: calc(100% - 2rem);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .bts-scene:hover {
@@ -2094,7 +2098,7 @@ footer nav {
     font-size: 0.52rem;
     letter-spacing: 0.1em;
     padding: 0.25rem 0.5rem;
-    white-space: nowrap;
+    white-space: normal;
     max-width: calc(100% - 1.3rem);
   }
   .vision-heading {

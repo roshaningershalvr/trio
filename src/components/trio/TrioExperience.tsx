@@ -1000,10 +1000,10 @@ function BehindGallery() {
   return (
     <div ref={gallery} className="bts-gallery">
       {rows.map((row) => (
-        <div className="bts-row" key={row[0].label}>
+        <div className="bts-row" key={row[0].src}>
           {row.map((image) => (
             <figure
-              key={image.label}
+              key={image.src}
               className="bts-scene"
               style={{ flexGrow: image.width / image.height }}
             >
