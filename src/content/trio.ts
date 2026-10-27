@@ -169,8 +169,17 @@ export const trioContent = {
       { name: "FINAL FILM", completion: 70 },
     ],
     // Numeric source-filename order; the supplied shortlist has no image 8.
-    images: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map(
-      (fileNumber, index): MediaAsset => ({
+    images: [
+      [1, 1920, 1440], [2, 1920, 1440], [3, 1920, 1440],
+      [4, 1920, 1440], [5, 1536, 1920], [6, 1280, 960],
+      [7, 1280, 960], [9, 1920, 1440], [10, 1920, 1440],
+      [11, 1673, 940], [12, 1673, 940], [13, 1920, 1078],
+      [14, 1920, 1078], [15, 1440, 1920], [16, 1920, 1440],
+      [17, 1440, 1920], [18, 1306, 980],
+    ].map(
+      ([fileNumber, width, height], index) => ({
+        width,
+        height,
         src: `/images/behind-trio/${fileNumber}.webp`,
         alt: `Behind the scenes of TRIO, scene ${index + 1}`,
         label: `Scene ${index + 1}`,

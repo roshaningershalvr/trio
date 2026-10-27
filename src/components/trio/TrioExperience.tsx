@@ -975,10 +975,57 @@ const SystemInterlude = () => {
   );
 };
 
+function BehindGallery() {
+  const gallery = useRef<HTMLDivElement>(null);
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    if (!gallery.current) return;
+    const observer = new ResizeObserver(([entry]) => {
+      setCompact(entry.contentRect.width < 640);
+    });
+    observer.observe(gallery.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Vary row sizes while sharing each row's height in the original aspect ratios.
+  const rowSizes = compact ? [2] : [2, 3, 3, 2, 3, 2, 2];
+  const rows: (typeof c.behind.images)[] = [];
+  for (let start = 0; start < c.behind.images.length;) {
+    const size = rowSizes[rows.length % rowSizes.length];
+    rows.push(c.behind.images.slice(start, start + size));
+    start += size;
+  }
+
+  return (
+    <div ref={gallery} className="bts-gallery">
+      {rows.map((row) => (
+        <div className="bts-row" key={row[0].label}>
+          {row.map((image) => (
+            <figure
+              key={image.label}
+              className="bts-scene"
+              style={{ flexGrow: image.width / image.height }}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                loading="lazy"
+              />
+              <figcaption className="glass-soft">{image.label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function TrioExperience() {
   const [intro, setIntro] = useState(true);
   const [trailer, setTrailer] = useState(false);
-  const [lightbox, setLightbox] = useState<number | null>(null);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [expandedPerson, setExpandedPerson] = useState<number | null>(null);
   const once = useRef(false);
@@ -994,11 +1041,6 @@ export function TrioExperience() {
   }, [intro]);
   useEffect(() => {
     if (sessionStorage.getItem("trio-intro-seen")) setIntro(false);
-  }, []);
-  useEffect(() => {
-    const close = (event: KeyboardEvent) => event.key === "Escape" && setLightbox(null);
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
   }, []);
   const openTrailer = () => setTrailer(true);
 
@@ -1331,25 +1373,7 @@ export function TrioExperience() {
                   </li>
                 ))}
               </ol>
-              <div className="bts-gallery">
-                {c.behind.images.map((image, i) => (
-                  <button
-                    key={image.label}
-                    type="button"
-                    onClick={() => setLightbox(i)}
-                    aria-label={`Open ${image.label}`}
-                    className="group relative overflow-hidden rounded-lg block w-full h-full text-left"
-                  >
-                    <Placeholder
-                      media={image}
-                      className="transition-transform duration-[800ms] group-hover:scale-105"
-                    />
-                    <span className="glass-soft font-medium text-[0.52rem] sm:text-[0.6rem] md:text-xs tracking-wider uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1.5 rounded-sm absolute left-2 bottom-2 sm:left-3 sm:bottom-3 md:left-4 md:bottom-4 whitespace-nowrap pointer-events-none inline-flex items-center justify-center leading-none max-w-[calc(100%-1rem)]">
-                      Scene {i + 1}
-                    </span>
-                  </button>
-                ))}
-              </div>
+              <BehindGallery />
             </div>
           </div>
         </motion.section>
@@ -1514,30 +1538,6 @@ export function TrioExperience() {
         </nav>
       </footer>
       <TrailerModal open={trailer} onClose={() => setTrailer(false)} />
-      <AnimatePresence>
-        {lightbox !== null && c.behind.images[lightbox] && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="lightbox"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Production image"
-          >
-            <Button
-              variant="iconGhost"
-              size="icon"
-              onClick={() => setLightbox(null)}
-              aria-label="Close image"
-            >
-              <X />
-            </Button>
-            <Placeholder media={c.behind.images[lightbox]} />
-            <span>{c.behind.images[lightbox].label}</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
