@@ -1941,9 +1941,10 @@ footer nav {
   }
   .hero-section img.hero-media {
     width: 100%;
+    top: 3.5rem;
     height: 76svh;
     object-fit: cover;
-    object-position: 55% top;
+    object-position: center top;
   }
   .hero-overlay {
     inset: 0;
@@ -1952,12 +1953,12 @@ footer nav {
       rgb(0 0 0 / 0.15) 0%,
       rgb(0 0 0 / 0.08) 35svh,
       rgb(0 0 0 / 0.45) 55svh,
-      var(--background) 76svh
+      var(--background) calc(76svh + 3.5rem)
     );
     pointer-events: none;
   }
   .hero-content {
-    padding: 54svh 0 2rem;
+    padding: calc(54svh + 3.5rem) 0 2rem;
   }
   .hero-eyebrow,
   .hero-content > p:first-child {
@@ -1968,7 +1969,7 @@ footer nav {
     margin-bottom: 1rem;
   }
   .hero-title-mark {
-    width: clamp(6rem, 26vw, 9rem);
+    width: clamp(7.5rem, 32vw, 11rem);
     max-height: none;
   }
   .hero-title-mark > img {
