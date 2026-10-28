@@ -1487,7 +1487,6 @@ export function TrioExperience() {
               </Button>
             </motion.div>
             <div className="release-lockup">
-              <TitleMark className="watch-title-mark" />
               <span>{c.film.releaseDate || c.film.releaseStatus}</span>
             </div>
           </div>
