@@ -1930,35 +1930,34 @@ footer nav {
     padding: 0.55rem 0;
   }
   .hero-section {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
     min-height: 100svh;
-    padding-top: 6.5rem;
+    align-items: flex-end;
   }
   .hero-section .hero-artwork {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    flex-shrink: 0;
+    position: absolute;
+    inset: 0;
     transform: none !important;
     opacity: 1 !important;
   }
   .hero-section img.hero-media {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+    height: 76svh;
+    object-fit: cover;
+    object-position: 55% top;
   }
   .hero-overlay {
-    inset: 6.5rem 0 auto;
-    height: calc(100vw * 9 / 16);
-    background: linear-gradient(to bottom, transparent 70%, var(--background));
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 0.15) 0%,
+      rgb(0 0 0 / 0.08) 35svh,
+      rgb(0 0 0 / 0.45) 55svh,
+      var(--background) 76svh
+    );
     pointer-events: none;
   }
   .hero-content {
-    padding: 1rem 0 2.5rem;
+    padding: 54svh 0 2rem;
   }
   .hero-eyebrow,
   .hero-content > p:first-child {
@@ -1966,10 +1965,10 @@ footer nav {
     font-size: 0.6rem;
   }
   .hero-content h1 {
-    margin-bottom: clamp(1.2rem, 2.5vh, 1.8rem);
+    margin-bottom: 1rem;
   }
   .hero-title-mark {
-    width: clamp(8rem, 35vw, 12rem);
+    width: clamp(6rem, 26vw, 9rem);
     max-height: none;
   }
   .hero-title-mark > img {
