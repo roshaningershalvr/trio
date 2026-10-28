@@ -1941,8 +1941,8 @@ footer nav {
   }
   .hero-section img.hero-media {
     width: 100%;
-    top: 3.5rem;
-    height: 76svh;
+    top: 0;
+    height: calc(76svh + 3.5rem);
     object-fit: cover;
     object-position: center top;
   }
@@ -1958,7 +1958,7 @@ footer nav {
     pointer-events: none;
   }
   .hero-content {
-    padding: calc(54svh + 3.5rem) 0 2rem;
+    padding: calc(54svh + 1rem) 0 2rem;
   }
   .hero-eyebrow,
   .hero-content > p:first-child {
