@@ -1091,7 +1091,7 @@ export function TrioExperience() {
       <Navigation onWatch={openTrailer} />
       <main>
         <section className="hero-section" aria-labelledby="hero-title">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0 z-0">
+          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="hero-artwork absolute inset-0 z-0">
             <Placeholder media={c.heroMedia} className="hero-media" />
           </motion.div>
           <div className="hero-overlay" />
