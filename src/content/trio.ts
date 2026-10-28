@@ -166,13 +166,13 @@ export const trioContent = {
       },
       {
         name: "JEREMY GLADSON",
-        role: "Creative Manager",
+        role: "Production Manager",
         details: [
-          "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Creative Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",
+          "Jeremy Gladson contributes to both the creative and logistical sides of TRIO. As Production Manager, he oversees on-set coordination, props, rentals, and production support, helping ensure the team and its resources come together effectively. He also portrays Abed, bringing one of the film’s central characters to life on screen.",
         ],
         image: {
           src: "/images/the-three/3.png",
-          alt: "Jeremy Gladson — Creative Manager",
+          alt: "Jeremy Gladson — Production Manager",
           label: "JEREMY GLADSON",
         },
       },
