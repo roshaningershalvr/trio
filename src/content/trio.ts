@@ -95,7 +95,7 @@ export const trioContent = {
         code: "CLASSIFIED / FILE 01",
         description: "The corporate authority at the center of a world built on total compliance.",
         details: [
-          "In TRIO, Dominor represents the biblical Antichrist in Revelation 13, Dominor embodies counterfeit divinity and absolute worldly power. Through Operation D6, he seeks to unite the world under one system, demanding not merely obedience, but worship. His name evokes *dominion* — the desire to rule and control all.",
+          "In TRIO, Dominor represents the ***biblical Antichrist*** in ***Revelation 13***, Dominor embodies counterfeit divinity and absolute worldly power. Through ***Operation D6***, he seeks to unite the world under one system, demanding not merely obedience, but worship. His name evokes *dominion* — the desire to rule and control all.",
         ],
         media: {
           src: "/images/WORLD/DOMINOR 2.JPG",
