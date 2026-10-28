@@ -110,10 +110,10 @@ export const trioContent = {
         description:
           "The state protocol combining Act 138A with the D6 economic system—an absolute identity and financial grid controlling who may buy, sell, work, and survive.",
         details: [
-          "Operation D6 is Dominor’s ultimate blueprint for global domination, developed under 6S6 Global, his multinational corporation. The name *D6* stands for *Dominor 6*, with the number six symbolically echoing the mark of the Beast 666 in biblical prophecy of Revelation 13. Through the D6 implant, Dominor seeks to control identity, finances, and access to the global economy — transforming technological advancement into an instrument of absolute control. What begins as a promise of progress becomes a demand for submission: accept the system, worship Dominor, or be excluded from society.",
+          "Operation D6 is Dominor’s ultimate blueprint for global domination, developed under 6S6 Global, his multinational corporation. The name *D6* stands for *Dominor 6*, with the number six symbolically echoing the mark of the Beast **666** in biblical prophecy of **Revelation 13**. Through the D6 implant, Dominor seeks to control identity, finances, and access to the global economy — transforming technological advancement into an instrument of absolute control. What begins as a promise of progress becomes a demand for submission: accept the system, worship Dominor, or be excluded from society.",
         ],
         media: {
-          src: "/images/WORLD/OPERATION D6.jpg",
+          src: "/images/WORLD/d6-microchip.png",
           alt: "Operation D6",
           label: "OPERATION D6",
         },

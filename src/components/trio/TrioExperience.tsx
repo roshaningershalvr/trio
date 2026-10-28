@@ -488,7 +488,10 @@ function WorldMorphingGrid({
                     <div className="world-expanded-body">
                       {card.details.map((paragraph, pIdx) => (
                         <p key={pIdx}>
-                          {paragraph.split(/(\*[^*]+\*)/g).map((chunk, cIdx) => {
+                          {paragraph.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((chunk, cIdx) => {
+                            if (chunk.startsWith("**") && chunk.endsWith("**")) {
+                              return <strong key={cIdx} className="font-bold">{chunk.slice(2, -2)}</strong>;
+                            }
                             if (chunk.startsWith("*") && chunk.endsWith("*")) {
                               return <em key={cIdx}>{chunk.slice(1, -1)}</em>;
                             }
