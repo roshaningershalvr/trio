@@ -1,17 +1,24 @@
 import { useMemo } from "react";
-import { TRANSACTIONS, CATEGORIES } from "@/lib/funding-data";
+import { TRANSACTIONS, OVERVIEW_METRICS } from "@/lib/funding-data";
 
 export function ExpenseCategoryCards() {
   const categoryData = useMemo(() => {
-    return CATEGORIES.map((category) => {
+    return [
+      "EQUIPMENT ADVANCE",
+      "EQUIPMENT RENT",
+      "PRODUCTION & SET WORKS",
+      "POST PRODUCTION & PUBLICITY",
+    ].map((category) => {
       const txs = TRANSACTIONS.filter((t) => t.category === category);
-      const total = txs.reduce((sum, t) => sum + t.amount, 0);
+      const total = category === "POST PRODUCTION & PUBLICITY"
+        ? OVERVIEW_METRICS.postProductionCost
+        : txs.reduce((sum, t) => sum + t.amount, 0);
       return {
         category,
         total,
         count: txs.length,
       };
-    }).sort((a, b) => b.total - a.total);
+    });
   }, []);
 
   const formatCurrency = (val: number) => `₹${new Intl.NumberFormat("en-IN").format(val)}`;
