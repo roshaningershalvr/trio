@@ -14,6 +14,28 @@ import {
 } from "framer-motion";
 import { FundingSection } from "@/components/Funding/FundingSection";
 
+const scriptureUrls: Record<string, string> = {
+  "Daniel 3": "https://www.biblegateway.com/passage/?search=daniel%203&version=ESV",
+  "Revelation 13": "https://www.biblegateway.com/passage/?search=revelation%2013&version=ESV",
+};
+
+function ScriptureLinks({ text }: { text: string }) {
+  return text.split(/(Daniel 3|Revelation 13)/g).map((part, index) =>
+    scriptureUrls[part] ? (
+      <a
+        key={index}
+        href={scriptureUrls[part]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline underline-offset-4 decoration-current hover:opacity-80 focus-visible:outline focus-visible:outline-2"
+        style={{ color: "inherit", font: "inherit" }}
+      >
+        {part}
+      </a>
+    ) : part,
+  );
+}
+
 function Placeholder({ media, className = "" }: { media: MediaAsset; className?: string }) {
   if (media.src)
     return (
@@ -490,15 +512,15 @@ function WorldMorphingGrid({
                         <p key={pIdx} className={card.title === "OPERATION D6" && pIdx === 1 ? "font-bold" : undefined}>
                           {paragraph.split(/(\*\*\*[^*]+\*\*\*|\*\*[^*]+\*\*|\*[^*]+\*)/g).map((chunk, cIdx) => {
                             if (chunk.startsWith("***") && chunk.endsWith("***")) {
-                              return <strong key={cIdx} className="font-bold italic text-white">{chunk.slice(3, -3)}</strong>;
+                              return <strong key={cIdx} className="font-bold italic text-white">{<ScriptureLinks text={chunk.slice(3, -3)} />}</strong>;
                             }
                             if (chunk.startsWith("**") && chunk.endsWith("**")) {
-                              return <strong key={cIdx} className="font-bold">{chunk.slice(2, -2)}</strong>;
+                              return <strong key={cIdx} className="font-bold">{<ScriptureLinks text={chunk.slice(2, -2)} />}</strong>;
                             }
                             if (chunk.startsWith("*") && chunk.endsWith("*")) {
-                              return <em key={cIdx}>{chunk.slice(1, -1)}</em>;
+                              return <em key={cIdx}>{<ScriptureLinks text={chunk.slice(1, -1)} />}</em>;
                             }
-                            return chunk;
+                            return <ScriptureLinks key={cIdx} text={chunk} />;
                           })}
                         </p>
                       ))}
@@ -1138,7 +1160,7 @@ export function TrioExperience() {
               transition={{ delay: 0.4 }}
               className="hero-inspiration"
             >
-              {c.film.inspiration}
+              {<ScriptureLinks text={c.film.inspiration} />}
             </motion.p>
             <motion.div
               initial="hidden"
@@ -1309,7 +1331,7 @@ export function TrioExperience() {
                 </div>
                 <div className="vision-copy">
                   {c.vision.copy.map((p) => (
-                    <p key={p}>{p}</p>
+                    <p key={p}><ScriptureLinks text={p} /></p>
                   ))}
                 </div>
               </div>
