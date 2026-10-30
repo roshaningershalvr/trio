@@ -36,14 +36,16 @@ function ScriptureLinks({ text }: { text: string }) {
   );
 }
 
-function Placeholder({ media, className = "" }: { media: MediaAsset; className?: string }) {
+function Placeholder({ media, className = "", priority = false }: { media: MediaAsset; className?: string; priority?: boolean }) {
   if (media.src)
     return (
       <img
         src={media.src}
         alt={media.alt}
         className={cn("h-full w-full object-cover", className)}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : undefined}
+        decoding="async"
       />
     );
   return (
@@ -1114,7 +1116,7 @@ export function TrioExperience() {
       <main>
         <section className="hero-section" aria-labelledby="hero-title">
           <motion.div style={{ y: heroY, opacity: heroOpacity }} className="hero-artwork absolute inset-0 z-0">
-            <Placeholder media={c.heroMedia} className="hero-media" />
+            <Placeholder media={c.heroMedia} className="hero-media" priority />
           </motion.div>
           <div className="hero-overlay" />
           <div className="hero-system">
