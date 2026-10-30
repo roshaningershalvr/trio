@@ -242,7 +242,7 @@ export const trioContent = {
     { role: "MUSIC BY", names: ["Jabin Jason Samuel"] },
     { role: "PRODUCTION MANAGER", names: ["Jeremy Gladson"] },
     { role: "DIRECTOR OF PHOTOGRAPHY", names: ["Richard Davidson"] },
-    { role: "FILM WEB DESIGNER", names: ["Roshan Ingershal"] },
+    { role: "FILM WEB DESIGNERS", names: ["Roshan Ingershal", "Jeshurun Paul Moses"] },
     { role: "DI-COLORIST", names: ["Agrim Punia"] },
     { role: "EDITING, VFX & PUBLICITY DESIGN", names: ["Jeshurun Paul Moses"] },
     { role: "PRODUCED BY", names: ["Bible Way Galaxy"] },
