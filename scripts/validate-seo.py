@@ -31,10 +31,12 @@ assert config["title"] in body
 assert not any("noindex" in m.get("content","") for m in metas if m.get("name")=="robots")
 canonical=[a["href"] for t,a in doc.tags if t=="link" and a.get("rel")=="canonical"]
 assert canonical == [config["siteUrl"]], canonical
-assert any(t=="link" and a.get("rel")=="icon" and a.get("href")=="/title-for-web.png" for t,a in doc.tags)
+assert any(t=="link" and a.get("rel")=="icon" and a.get("href")=="/favicon.png" for t,a in doc.tags)
 assert len(doc.jsonld)==1
 nodes=doc.jsonld[0]["@graph"]
 assert {n["@type"] for n in nodes} == {"Movie","Organization","WebSite"}
+websites=[n for n in nodes if n["@type"]=="WebSite"]
+assert len(websites)==1 and websites[0]["name"]=="TRIO" and websites[0]["url"]==config["siteUrl"]
 assert next(n for n in nodes if n["@type"]=="Movie")["productionCompany"]["@id"]==config["siteUrl"]+"#organization"
 ids={a["id"] for _,a in doc.tags if "id" in a}
 for tag,a in doc.tags:
